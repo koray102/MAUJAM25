@@ -123,13 +123,11 @@ public class NPCController : MonoBehaviour
             facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
 
-            // Eðer oyuncu saldýrý menzilinin dýþýndaysa, NPC'yi oyuncunun x pozisyonuna doðru hareket ettir
+            // Eðer oyuncu saldýrý menzilinin dýþýndaysa, ancak menzile yakýnsa, NPC'yi oyuncunun x pozisyonuna doðru hareket ettir
             if (Mathf.Abs(deltaX) > attackRange)
             {
-                // Hedef x pozisyonunu hesapla (saldýrý menzilinin sýnýrýnda duracak þekilde)
-                float targetX = player.position.x - Mathf.Sign(deltaX) * attackRange;
                 Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, targetX, chaseSpeed * Time.deltaTime);
+                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
                 transform.position = newPos;
             }
             else
@@ -154,14 +152,19 @@ public class NPCController : MonoBehaviour
             // Chase zamanlayýcýsýný azalt
             chaseTimer -= Time.deltaTime;
 
+            // NPC'nin bakýþ yönünü belirle
+            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+            lastFacingDirection = facingDirection;
+
             // Chase zamanlayýcýsý sýfýrdan büyükse, NPC'yi oyuncunun son bilinen x pozisyonuna doðru hareket ettir
-            if (chaseTimer > 0f)
+            if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange)
             {
-                // Hedef x pozisyonunu hesapla (saldýrý menzilinin sýnýrýnda duracak þekilde)
-                float targetX = player.position.x - Mathf.Sign(deltaX) * attackRange;
                 Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, targetX, chaseSpeed * Time.deltaTime);
+                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
                 transform.position = newPos;
+            }else if (chaseTimer > 0f)
+            {
+               
             }
             else
             {
@@ -170,6 +173,7 @@ public class NPCController : MonoBehaviour
             }
         }
     }
+
 
 
 
