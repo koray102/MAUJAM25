@@ -1,0 +1,418 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerController2D : MonoBehaviour
+{
+    [Header("Movement Settings")]
+    public float walkSpeed = 3f;
+    public float runSpeed = 6f;
+    public float jumpForce = 5f;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
+
+    [Header("Attack Settings")]
+    public float attackCooldown = 0.5f;   // Saldırı tekrarına izin veren süre
+    public float attackDuration = 0.2f;   // Saldırı animasyon/işlem süresi
+    public Transform attackPoint;         // Kılıcın ucu/kılıca yakın bir nokta
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
+    public int attackDamage = 10;
+
+    [Header("Wall Climb Settings")]
+    public Transform wallCheck;
+    public float wallCheckDistance = 0.5f;
+    public float wallSlideSpeed = 2f;
+    public float wallClimbSpeed = 3f;
+    public float wallJumpForce = 7f;
+    public LayerMask wallLayer;
+
+    [Header("Dash Settings")]
+    [Tooltip("Dash hızı (x ekseninde). Karakter ne kadar güçlü atılsın?")]
+    public float dashSpeed = 10f;
+
+    [Tooltip("Dash süresi. (Karakterin hızlı şekilde ilerleyeceği zaman aralığı)")]
+    public float dashDuration = 0.2f;
+
+    [Tooltip("Dash tekrar kullanılmadan önce beklenmesi gereken süre.")]
+    public float dashCooldown = 1f;
+
+    [Tooltip("Dash için kullanılacak tuş. Örn: E.")]
+    public KeyCode dashKey = KeyCode.E;
+
+    // Duvardan geri sekme (Wall Bounce) ayarları
+    [Header("Wall Bounce Settings")]
+    [Tooltip("Wall Bounce için kullanılacak tuş (örneğin R).")]
+    public KeyCode wallBounceKey = KeyCode.Space;
+    [Tooltip("Duvardan sekme sırasında x ekseninde uygulanacak kuvvet.")]
+    public float wallBounceHorizontalForce = 5f;
+    [Tooltip("Duvardan sekme sırasında y ekseninde uygulanacak kuvvet.")]
+    public float wallBounceVerticalForce = 5f;
+    [Tooltip("Wall Bounce süresi.")]
+    public float wallBounceDuration = 0.2f;
+    [Tooltip("Wall Bounce yapabilmek için bekleme süresi.")]
+    public float wallBounceCooldown = 1f;
+
+    [Header("Wall Bounce Facing Cooldown")]
+    public float wallBounceFacingCooldown = 0.5f;
+    private float wallBounceFacingTimer = 0f;
+
+
+    private Rigidbody2D _rb;
+    private Animator _anim;
+
+    // Hareket ve durum değişkenleri
+    private float _horizontalInput;
+    private bool _isRunning;
+    private bool _isGrounded;
+    private bool _isAttacking;
+    private float _attackTimer;
+
+    // Duvarla ilgili durumlar
+    private bool _isTouchingWall;
+    private bool _isWallSliding;
+
+    // Dash ile ilgili durum değişkenleri
+    private bool _isDashing;
+    private float _dashTimeLeft;      // Kalan dash süresi
+    private float _lastDashTime;      // Son dash yapılan zaman
+
+    // Wall Bounce durum değişkenleri
+    private bool _isWallBouncing;
+    private float _wallBounceTimeLeft;
+    private float _lastWallBounceTime;
+
+
+    void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        // Yatay girdi (A/D veya Sol/Sağ ok tuşları)
+        _horizontalInput = Input.GetAxisRaw("Horizontal");
+        // Koşma tuşu
+        _isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        // Zıplama
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_isWallSliding && !_isGrounded)
+            {
+                //WallJump();
+            }
+            else if (_isGrounded && !_isAttacking)
+            {
+                Jump();
+            }
+        }
+
+        // Saldırı
+        if (Input.GetKeyDown(KeyCode.F) && !_isAttacking && _attackTimer <= 0f)
+        {
+            Attack();
+        }
+
+        // Attack cooldown’u zamanla azalt
+        if (_attackTimer > 0f)
+        {
+            _attackTimer -= Time.deltaTime;
+        }
+
+        // Dash giriş (E tuşu)
+        if (Input.GetKeyDown(dashKey))
+        {
+            // Cooldown geçmiş mi, şu an dash yapmıyor muyuz?
+            if (!_isDashing && Time.time >= _lastDashTime + dashCooldown)
+            {
+                StartDash();
+            }
+        }
+
+        // Eğer dash halindeysek kalan süreyi düşürüyoruz
+        if (_isDashing)
+        {
+            _dashTimeLeft -= Time.deltaTime;
+            if (_dashTimeLeft <= 0f)
+            {
+                StopDash();
+            }
+        }
+
+        // DUVARDAN GERİ SEKME (Wall Bounce) girişleri
+        // Sadece duvara değiyorken (wallCheck) wall bounce yapılabilir
+        if (Input.GetKeyDown(wallBounceKey) && (_isTouchingWall || wallBounceFacingTimer > 0f))
+        {
+            if (!_isWallBouncing && Time.time >= _lastWallBounceTime + wallBounceCooldown)
+                if(_isTouchingWall)
+                {
+                    StartWallBounce();
+                }else
+                {
+                    StartWallBounce(-1);
+                }
+        }
+
+        if (_isWallBouncing)
+        {
+            _wallBounceTimeLeft -= Time.deltaTime;
+            if (_wallBounceTimeLeft <= 0f)
+                StopWallBounce();
+        }
+
+        if (wallBounceFacingTimer > 0f)
+        {
+            wallBounceFacingTimer -= Time.deltaTime;
+        }
+
+        UpdateAnimator();
+    }
+
+    void FixedUpdate()
+    {
+        // Zeminde miyiz kontrolü
+        CheckGround();
+
+        // Duvar kontrolü
+        CheckWall();
+
+        // Eğer dash, wall bounce veya saldırı durumunda normal hareket iptal edilsin
+        if (_isDashing || _isWallBouncing || _isAttacking)
+            return;
+
+        // Duvardaysak duvar tırmanma/slide hareketi
+        if (_isWallSliding && !_isGrounded)
+        {
+            WallSlideMovement();
+        }
+        else
+        {
+            // Normal yatay hareket
+            float currentSpeed = _isRunning ? runSpeed : walkSpeed;
+            Vector2 velocity = _rb.linearVelocity;
+            velocity.x = _horizontalInput * currentSpeed;
+            _rb.linearVelocity = velocity;
+        }
+
+        // Yön değiştirme (Sprite flip)
+        if (_horizontalInput > 0 && transform.localScale.x < 0)
+        {
+            Flip();
+        }
+        else if (_horizontalInput < 0 && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+    }
+
+    // =====================================================
+    // =============== Duvar Tırmanma Fonksiyonları ========
+    // =====================================================
+    private void CheckWall()
+    {
+        float direction = transform.localScale.x;
+        Vector2 checkPos = wallCheck.position;
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.right * direction, wallCheckDistance, wallLayer);
+
+        _isTouchingWall = (!_isGrounded && hit.collider != null);
+        _isWallSliding = _isTouchingWall;
+    }
+
+    private void WallSlideMovement()
+    {
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        Vector2 velocity = _rb.linearVelocity;
+
+        if (Mathf.Abs(verticalInput) > 0.1f)
+        {
+            velocity.y = verticalInput * wallClimbSpeed;
+        }
+        else
+        {
+            if (velocity.y < -wallSlideSpeed)
+            {
+                velocity.y = -wallSlideSpeed;
+            }
+        }
+        _rb.linearVelocity = velocity;
+    }
+
+    private void WallJump()
+    {
+        float direction = transform.localScale.x;
+        direction *= -1f;
+
+        Vector2 jumpVelocity = new Vector2(_rb.linearVelocity.x, wallJumpForce);
+        _rb.linearVelocity = jumpVelocity;
+
+        _isWallSliding = false;
+        _isTouchingWall = false;
+
+        if (_anim)
+            _anim.SetTrigger("Jump");
+    }
+
+    // --------------------- Wall Bounce Fonksiyonları ---------------------
+
+    private void StartWallBounce(int direction = 1)
+    {
+        _isWallBouncing = true;
+        _wallBounceTimeLeft = wallBounceDuration;
+        _lastWallBounceTime = Time.time;
+        // Karakter duvara değiyorsa, bakış yönünün tersine doğru wall bounce yaparız
+        float bounceDirection = transform.localScale.x * -1f;
+        _rb.linearVelocity = new Vector2(bounceDirection * direction * wallBounceHorizontalForce, wallBounceVerticalForce);
+        if (_anim) _anim.SetTrigger("WallBounce");
+    }
+
+    private void StopWallBounce()
+    {
+        _isWallBouncing = false;
+        Vector2 currentVel = _rb.linearVelocity;
+        currentVel.x = 0f;
+        _rb.linearVelocity = currentVel;
+    }
+
+    // ---------------------------------------------------------------------
+
+    // =====================================================
+    // =============== Dash Fonksiyonları ==================
+    // =====================================================
+    private void StartDash()
+    {
+        _isDashing = true;
+        _dashTimeLeft = dashDuration;
+        _lastDashTime = Time.time;
+
+        // Karakterin baktığı yönü alalım
+        float dashDirection = Mathf.Sign(transform.localScale.x);
+
+        // Karakteri yatay eksende hızla fırlat
+        _rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0f);
+
+        // Opsiyonel: Animasyon tetiklemek isterseniz
+        if (_anim)
+        {
+            _anim.SetTrigger("Dash");
+        }
+    }
+
+    private void StopDash()
+    {
+        _isDashing = false;
+        // Dash bitince, isterseniz horizontal velocity'yi sıfırlayabilirsiniz
+        // ya da mevcut _rb.linearVelocity.y değerini koruyarak x'i 0 yapabilirsiniz.
+        Vector2 currentVel = _rb.linearVelocity;
+        currentVel.x = 0f;
+        _rb.linearVelocity = currentVel;
+    }
+
+    // =====================================================
+    // =============== Normal Zıplama & Zemin ==============
+    // =====================================================
+    private void Jump()
+    {
+        Vector2 velocity = _rb.linearVelocity;
+        velocity.y = jumpForce;
+        _rb.linearVelocity = velocity;
+
+        if (_anim)
+            _anim.SetTrigger("Jump");
+    }
+
+    private void CheckGround()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        _isGrounded = (hit != null);
+    }
+
+    private void Flip()
+    {
+        if (_isTouchingWall)
+        {
+            wallBounceFacingTimer = wallBounceFacingCooldown;
+        }
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    // =====================================================
+    // ==================== Saldırı ========================
+    // =====================================================
+    private void Attack()
+    {
+        _isAttacking = true;
+        _attackTimer = attackCooldown;
+
+        if (_anim)
+            _anim.SetTrigger("Attack");
+
+        PerformAttack();
+        Invoke(nameof(ResetAttack), attackDuration);
+    }
+
+    private void PerformAttack()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            //Enemy enemyScript = enemy.GetComponent<Enemy>();
+            //if (enemyScript != null)
+            //{
+            //    enemyScript.TakeDamage(attackDamage);
+            //}
+        }
+    }
+
+    private void ResetAttack()
+    {
+        _isAttacking = false;
+    }
+
+    // =====================================================
+    // =================== Animasyon =======================
+    // =====================================================
+    private void UpdateAnimator()
+    {
+        if (_anim == null)
+            return;
+
+        _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
+        _anim.SetBool("IsGrounded", _isGrounded);
+        _anim.SetBool("IsRunning", _isRunning);
+        _anim.SetBool("IsWallSliding", _isWallSliding);
+        _anim.SetBool("IsDashing", _isDashing);
+    }
+
+    // =====================================================
+    // =================== Gizmos Debug ====================
+    // =====================================================
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
+
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+
+        if (wallCheck != null)
+        {
+            Gizmos.color = Color.blue;
+            float direction = (transform != null) ? transform.localScale.x : 1f;
+            Vector2 startPos = wallCheck.position;
+            Vector2 endPos = startPos + Vector2.right * direction * wallCheckDistance;
+            Gizmos.DrawLine(startPos, endPos);
+        }
+    }
+}
