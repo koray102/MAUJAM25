@@ -5,7 +5,6 @@ public class NPCController : MonoBehaviour
     [Header("Hareket Ayarlarý")]
     public float patrolSpeed = 2f;       // Devriye hýzý
     public float chaseSpeed = 3f;        // Kovalama hýzý
-    public float jumpForce = 5f;         // Zýplama kuvveti
 
     [Header("Algýlama ve Saldýrý")]
     public float detectionRange = 5f;    // Ýleriye yönelik algýlama mesafesi
@@ -13,12 +12,10 @@ public class NPCController : MonoBehaviour
     public float attackCooldown = 1f;    // Saldýrý sonrasý bekleme süresi (1 saniye)
     private float attackTimer = 0f;
     public float detectionRayOffset = 0.5f;  // Raycast için dikey ofset
-
-    [Header("Algýlama Layer Mask")]
-    public LayerMask detectionLayerMask; // NPC'nin görmezden gelmesini istediðiniz layer'larý belirleyin
+    public LayerMask detectionLayerMask;     // NPC’nin kendi collider’ýný ya da istenmeyen layer’larý görmezden gelmek için
 
     [Header("Chase Bellek Süresi")]
-    public float chaseMemoryTime = 2f;   // Oyuncu tespitini kaybederse kovalamanýn devam edeceði süre
+    public float chaseMemoryTime = 2f;   // Oyuncu belirli süre algýlanmazsa devriyeye dönme süresi
     private float chaseTimer = 0f;
     private int chaseDirectionSign = 0;  // Kovalamaya baþlandýðý andaki yön (1 = sað, -1 = sol)
 
@@ -38,19 +35,16 @@ public class NPCController : MonoBehaviour
     private enum NPCState { Patrol, Chase }
     private NPCState state = NPCState.Patrol;
 
-    // NPC’nin anlýk bakýþ yönü ve son bilinen yönü (patrol esnasýnda korunur)
+    // NPC’nin bakýþ yönü bilgisi (raycast ve hareket için)
     private Vector2 facingDirection = Vector2.right;
     private Vector2 lastFacingDirection = Vector2.right;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
-        {
             player = playerObj.transform;
-        }
     }
 
     void Update()
@@ -60,9 +54,7 @@ public class NPCController : MonoBehaviour
 
         // Yer kontrolü
         if (groundCheck != null)
-        {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        }
 
         switch (state)
         {
@@ -76,125 +68,119 @@ public class NPCController : MonoBehaviour
                     chaseDirectionSign = (player.position.x - transform.position.x) >= 0 ? 1 : -1;
                 }
                 break;
-
             case NPCState.Chase:
                 ChaseAndAttack();
                 break;
         }
     }
 
-    // Devriye modunda belirlenen noktalar arasýnda hareket
+    // Devriye modunda belirlenmiþ noktalar arasýnda hareket
     void Patrol()
     {
         if (patrolPoints.Length == 0)
             return;
 
         Transform targetPoint = patrolPoints[currentPatrolIndex];
-
         if (Vector2.Distance(transform.position, targetPoint.position) > 0.1f)
         {
-            // Hedefe doðru giderken bakýþ yönünü güncelle
             facingDirection = (targetPoint.position.x - transform.position.x) >= 0 ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
+            transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
         }
         else
         {
-            // Noktaya ulaþýldýðýnda son yön korunur ve sonraki patrol noktasýna geçilir
             facingDirection = lastFacingDirection;
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
         }
-
-        transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
     }
 
-    // Ýleriye yönelik 2 raycast (üst ve alt) kullanarak oyuncu algýlamasý
+    // Ýleriye yönelik üst ve alt offset’li 2 raycast ile oyuncu algýlama
     bool IsPlayerDetected()
     {
         Vector2 originUpper = (Vector2)transform.position + Vector2.up * detectionRayOffset;
         Vector2 originLower = (Vector2)transform.position - Vector2.up * detectionRayOffset;
         RaycastHit2D hitUpper = Physics2D.Raycast(originUpper, facingDirection, detectionRange, detectionLayerMask);
         RaycastHit2D hitLower = Physics2D.Raycast(originLower, facingDirection, detectionRange, detectionLayerMask);
-
-        if ((hitUpper.collider != null && hitUpper.collider.CompareTag("Player")) ||
-            (hitLower.collider != null && hitLower.collider.CompareTag("Player")))
-        {
-            return true;
-        }
-        return false;
+        return (hitUpper.collider != null && hitUpper.collider.CompareTag("Player")) ||
+               (hitLower.collider != null && hitLower.collider.CompareTag("Player"));
     }
 
-    // Kovalama ve saldýrý durumu
+    // Chase modunda, oyuncu eðer yukarýdaysa NPC zýplamýyor; yalnýzca x eksenindeki hizaya gelmeye çalýþýyor
     void ChaseAndAttack()
     {
+        // NPC ile oyuncu arasýndaki yatay mesafeyi hesapla
         float deltaX = player.position.x - transform.position.x;
+
+        // Oyuncunun tespit edilip edilmediðini kontrol et
         bool detected = IsPlayerDetected();
 
         if (detected)
         {
-            // Eðer oyuncu NPC’nin baktýðý yönde ise, chase belleðini sýfýrla ve yön güncelle
+            // Chase zamanlayýcýsýný sýfýrla
             chaseTimer = chaseMemoryTime;
-            chaseDirectionSign = (deltaX >= 0) ? 1 : -1;
 
-            // Oyuncuya doðru hareket et (sadece yatay)
-            Vector2 newPos = transform.position;
-            newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
-            transform.position = newPos;
-
+            // NPC'nin bakýþ yönünü belirle
             facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
-        }
-        else
-        {
-            // Eðer oyuncu ileriye dönük raycast’te tespit edilemiyorsa, bellekte kalan süre boyunca
-            // önceki yön bilgisiyle (chaseDirectionSign) hareket etmeye devam et.
-            chaseTimer -= Time.deltaTime;
-            if (chaseTimer > 0f)
+
+            // Eðer oyuncu saldýrý menzilinin dýþýndaysa, NPC'yi oyuncunun x pozisyonuna doðru hareket ettir
+            if (Mathf.Abs(deltaX) > attackRange)
             {
+                // Hedef x pozisyonunu hesapla (saldýrý menzilinin sýnýrýnda duracak þekilde)
+                float targetX = player.position.x - Mathf.Sign(deltaX) * attackRange;
                 Vector2 newPos = transform.position;
-                newPos.x += chaseSpeed * Time.deltaTime * chaseDirectionSign;
+                newPos.x = Mathf.MoveTowards(transform.position.x, targetX, chaseSpeed * Time.deltaTime);
                 transform.position = newPos;
-            }
-        }
-
-        // Yükseklik farký varsa ve NPC yerdeyse zýplama
-        float verticalDifference = player.position.y - transform.position.y;
-        if (verticalDifference > 0.5f && isGrounded)
-        {
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-        }
-
-        // Saldýrý: Oyuncu attackRange içindeyse saldýr, ardýndan attackCooldown süresi bekle
-        if (Mathf.Abs(deltaX) <= attackRange)
-        {
-            if (attackTimer <= 0f)
-            {
-                AttackPlayer();
-                attackTimer = attackCooldown;
             }
             else
             {
-                attackTimer -= Time.deltaTime;
+                // Saldýrý menzilindeyse, saldýrý zamanlayýcýsýný kontrol et
+                if (attackTimer <= 0f)
+                {
+                    // Saldýrýyý gerçekleþtir
+                    AttackPlayer();
+                    // Saldýrý sonrasý bekleme süresini ayarla
+                    attackTimer = attackCooldown;
+                }
+                else
+                {
+                    // Saldýrý zamanlayýcýsýný azalt
+                    attackTimer -= Time.deltaTime;
+                }
             }
         }
         else
         {
-            attackTimer = 0f;
-        }
+            // Chase zamanlayýcýsýný azalt
+            chaseTimer -= Time.deltaTime;
 
-        // Eðer chase belleði süresi dolduysa, devriye moduna dön
-        if (chaseTimer <= 0f)
-        {
-            state = NPCState.Patrol;
+            // Chase zamanlayýcýsý sýfýrdan büyükse, NPC'yi oyuncunun son bilinen x pozisyonuna doðru hareket ettir
+            if (chaseTimer > 0f)
+            {
+                // Hedef x pozisyonunu hesapla (saldýrý menzilinin sýnýrýnda duracak þekilde)
+                float targetX = player.position.x - Mathf.Sign(deltaX) * attackRange;
+                Vector2 newPos = transform.position;
+                newPos.x = Mathf.MoveTowards(transform.position.x, targetX, chaseSpeed * Time.deltaTime);
+                transform.position = newPos;
+            }
+            else
+            {
+                // Chase zamanlayýcýsý sýfýra ulaþtýysa, devriye moduna geri dön
+                state = NPCState.Patrol;
+            }
         }
     }
 
-    // Saldýrý iþlemi (örneðin: hasar verme, animasyon oynatma vb.)
+
+
+
+
     void AttackPlayer()
     {
         Debug.Log("Player'a saldýrýldý!");
+        // Buraya oyuncuya hasar verme veya animasyon tetikleme kodlarýný ekleyebilirsiniz.
     }
 
-    // Seçildiðinde, NPC’nin baktýðý yönde 2 raycast (üst ve alt) gösteren Gizmo çizimi
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
@@ -204,3 +190,4 @@ public class NPCController : MonoBehaviour
         Gizmos.DrawLine(originLower, originLower + facingDirection * detectionRange);
     }
 }
+
