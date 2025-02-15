@@ -58,6 +58,9 @@ public class PlayerController2D : MonoBehaviour
     [Header("Wall Bounce Facing Cooldown")]
     public float wallBounceFacingCooldown = 0.5f;
     private float wallBounceFacingTimer = 0f;
+    
+    [Header("Bullet Throw Settings")]
+    public float bulletThrowForce = 10f;
 
 
     private Rigidbody2D _rb;
@@ -358,14 +361,30 @@ public class PlayerController2D : MonoBehaviour
 
     private void PerformAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        foreach (Collider2D enemy in hitEnemies)
+        // Attack alanındaki tüm objeleri alıyoruz (layer filtresi uygulamıyoruz ki hem enemy hem de bullet kontrol edilebilsin)
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        foreach (Collider2D obj in hitObjects)
         {
-            //Enemy enemyScript = enemy.GetComponent<Enemy>();
-            //if (enemyScript != null)
-            //{
-            //    enemyScript.TakeDamage(attackDamage);
-            //}
+            // Eğer objenin layer'ı "bullet" ise:
+            if(obj.gameObject.layer == LayerMask.NameToLayer("Shuriken"))
+            {
+                Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+                if(rb != null)
+                {
+                    // Rastgele bir yön belirleyip kuvvet uyguluyoruz.
+                    Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+                    rb.AddForce(randomDirection * bulletThrowForce, ForceMode2D.Impulse);
+                }
+            }
+            else
+            {
+                // Diğer objeler için, örneğin enemy varsa hasar verelim:
+                //Enemy enemyScript = obj.GetComponent<Enemy>();
+                //if(enemyScript != null)
+                //{
+                //    enemyScript.TakeDamage(attackDamage);
+                //}
+            }
         }
     }
 
