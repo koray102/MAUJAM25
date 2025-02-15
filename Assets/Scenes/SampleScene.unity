@@ -1149,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516508102152981363, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183877292847940923, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
@@ -1204,6 +1204,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
+--- !u!1 &1334892898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1334892899}
+  m_Layer: 26
+  m_Name: MetalImpactTransformu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1334892899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334892898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.76, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1962727123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1606770623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1281,25 +1312,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1476531665180961176, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2775807884415316810, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: m_Name
       value: NPC-4
       objectReference: {fileID: 0}
-    - target: {fileID: 2775807884415316810, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2782602620245085671, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.773006
+      value: -8.34
       objectReference: {fileID: 0}
     - target: {fileID: 2782602620245085671, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.089816
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2782602620245085671, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1334,16 +1357,31 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3301703055690965918, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
+      propertyPath: MetalImpact
+      value: 
+      objectReference: {fileID: 5378289862536929831, guid: d8dee9783d993064c861c7d1e0cc4866, type: 3}
+    - target: {fileID: 3301703055690965918, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
+      propertyPath: KalkanSolEldeMi
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301703055690965918, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
+      propertyPath: CarpismaTransformu
+      value: 
+      objectReference: {fileID: 1334892899}
+    - target: {fileID: 3301703055690965918, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 240875908}
+      objectReference: {fileID: 192467639}
     - target: {fileID: 3301703055690965918, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
       propertyPath: 'patrolPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 192467639}
+      objectReference: {fileID: 240875908}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2782602620245085671, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1334892899}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
 --- !u!1 &1688355137
@@ -1665,6 +1703,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 581711780198428998, guid: 62fff55a953c63649b697f074a053915, type: 3}
   m_PrefabInstance: {fileID: 1929800284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1962727123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2782602620245085671, guid: a45261eb43a873a49b41432392e81bfb, type: 3}
+  m_PrefabInstance: {fileID: 1637497331}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2023730568
 GameObject:

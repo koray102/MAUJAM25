@@ -3,23 +3,21 @@ using UnityEngine;
 
 public class NPC4Controller : NPCBase
 {
-    public bool isShielded = true;
-    public KalkanScript Kalkan;
-    public Transform SolKalkanTutucu;
-    public Transform SagKalkanTutucu;
+    public ParticleSystem MetalImpact;
+    public Transform CarpismaTransformu;
+    public bool KalkanSolEldeMi = false;
     protected override void Patrol()
     {
-        if (isShielded)
+
+        if (spriteRenderer.flipX)
         {
-            if (spriteRenderer.flipX && Kalkan.transform.position != SolKalkanTutucu.position)
-            {
-                Kalkan.transform.position = SolKalkanTutucu.position;
-            }
-            else if (!spriteRenderer.flipX && Kalkan.transform.position != SagKalkanTutucu.position)
-            {
-                Kalkan.transform.position = SagKalkanTutucu.position;
-            }
+            KalkanSolEldeMi = true;
         }
+        else if (!spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = false;
+        }
+
 
         if (patrolPoints.Length == 0)
             return;
@@ -40,16 +38,13 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if(isShielded)
+        if (spriteRenderer.flipX)
         {
-            if (spriteRenderer.flipX && Kalkan.transform.position != SolKalkanTutucu.position)
-            {
-                Kalkan.transform.position = SolKalkanTutucu.position;
-            }
-            else if (!spriteRenderer.flipX && Kalkan.transform.position != SagKalkanTutucu.position)
-            {
-                Kalkan.transform.position = SagKalkanTutucu.position;
-            }
+            KalkanSolEldeMi = true;
+        }
+        else if (!spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = false;
         }
 
 
@@ -128,14 +123,13 @@ public class NPC4Controller : NPCBase
     public override void GetDamage()
     {
         // Eðer oyuncu, NPC'nin baktýðý yönde ise (shield korumasý devrede) 
-        if (((!spriteRenderer.flipX && player.position.x > transform.position.x) || (spriteRenderer.flipX && player.position.x < transform.position.x)) && isShielded)
+        if (!((!spriteRenderer.flipX && player.position.x > transform.position.x) || (spriteRenderer.flipX && player.position.x < transform.position.x)))
         { 
-            isShielded = false;
-            Kalkan.Brake();
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
         }
     }
 }
