@@ -116,7 +116,11 @@ public class PlayerController2D : MonoBehaviour
         // Zıplama
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (_isGrounded)
+            if (_isWallSliding && !_isGrounded)
+            {
+                //WallJump();
+            }
+            else if (_isGrounded && !_isAttacking)
             {
                 Jump();
             }
@@ -140,6 +144,7 @@ public class PlayerController2D : MonoBehaviour
                 lastAttackType = 0;
             }
         }
+
 
         // Attack cooldown’u zamanla azalt
         if (_attackTimer > 0f)
@@ -243,10 +248,6 @@ public class PlayerController2D : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.right * direction, wallCheckDistance, wallLayer);
 
         _isTouchingWall = (!_isGrounded && hit.collider != null);
-        if(_isTouchingWall)
-        {
-            Debug.Log(hit.collider.gameObject);
-        }
         _isWallSliding = _isTouchingWall;
     }
 
@@ -254,17 +255,16 @@ public class PlayerController2D : MonoBehaviour
     {
         Vector2 velocity = _rb.linearVelocity;
 
-        if (velocity.y < -wallSlideSpeed)
+        if(_horizontalInput == 0)
         {
-            velocity.y = -wallSlideSpeed;
+            if (velocity.y < -wallSlideSpeed)
+            {
+                velocity.y = -wallSlideSpeed;
+            }
         }
-        
         _rb.linearVelocity = velocity;
     }
-
-    // =================================================
-    //=============== Wall Bounce Fonksiyonları ========
-    // =================================================
+    // --------------------- Wall Bounce Fonksiyonları ---------------------
 
     private void StartWallBounce(int direction = 1)
     {
@@ -331,7 +331,8 @@ public class PlayerController2D : MonoBehaviour
         Ziplama.Play();
 
         if (_anim)
-        _anim.SetTrigger("JumpUp"); // Yukarı zıplama animasyonu
+            _anim.SetTrigger("JumpUp"); // Yukarı zıplama animasyonu
+
     }
 
     private void CheckGround(bool eskiisGrounded)
@@ -386,7 +387,6 @@ public class PlayerController2D : MonoBehaviour
         comboTimer = comboTimeout;
     }
 
-
     private void StartAttack(int attackType)
     {
         _isAttacking = true;
@@ -400,7 +400,7 @@ public class PlayerController2D : MonoBehaviour
             _anim.ResetTrigger("Attack2");
             _anim.ResetTrigger("Attack3");
 
-            if (attackType == 1)      _anim.SetTrigger("Attack1");
+            if (attackType == 1) _anim.SetTrigger("Attack1");
             else if (attackType == 2) _anim.SetTrigger("Attack2");
             else if (attackType == 3) _anim.SetTrigger("Attack3");
         }
@@ -420,12 +420,13 @@ public class PlayerController2D : MonoBehaviour
         foreach (Collider2D obj in hitObjects)
         {
             // Eğer objenin layer'ı "bullet" ise:
-            if(obj.gameObject.layer == LayerMask.NameToLayer("Shuriken"))
+            if (obj.gameObject.layer == LayerMask.NameToLayer("Shuriken"))
             {
                 Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-                
-                if(rb != null)
+
+                if (rb != null)
                 {
+                    Instantiate(Isilti, obj.transform.position, Quaternion.identity);
                     // Karakterin facing yönünü al (örneğin, sağa bakıyorsa +1, sola -1)
                     float facing = Mathf.Sign(transform.localScale.x);
                     // x bileşeni kesinlikle karakterin tersine, y bileşeni hafif rastgele (örnek: -0.5 ile 0.5 arası)
@@ -437,13 +438,14 @@ public class PlayerController2D : MonoBehaviour
             {
                 // Diğer objeler için, örneğin enemy varsa hasar verelim:
                 NPCBase enemyScript = obj.GetComponent<NPCBase>();
-                if(enemyScript != null)
+                if (enemyScript != null)
                 {
                     enemyScript.GetDamage();
                 }
             }
         }
     }
+
 
     private void ResetAttack()
     {
@@ -466,6 +468,7 @@ public class PlayerController2D : MonoBehaviour
         _anim.SetBool("IsDashing", _isDashing);
         _anim.SetBool("IsFalling", !_isGrounded && _rb.linearVelocity.y < 0);
     }
+
 
     // =====================================================
     // =================== Gizmos Debug ====================
@@ -493,4 +496,5 @@ public class PlayerController2D : MonoBehaviour
             Gizmos.DrawLine(startPos, endPos);
         }
     }
+
 }
