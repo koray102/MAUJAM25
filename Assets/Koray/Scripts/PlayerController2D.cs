@@ -62,6 +62,13 @@ public class PlayerController2D : MonoBehaviour
     [Header("Bullet Throw Settings")]
     public float bulletThrowForce = 10f;
 
+    [Header("Combo Settings")]
+    public float comboTimeout = 1f; // Komboyu devam ettirmek için max bekleme süresi
+
+    private float comboTimer = 0f;
+    private bool inCombo = false;
+    private int lastAttackType = 0;
+
 
     private Rigidbody2D _rb;
     private Animator _anim;
@@ -227,14 +234,9 @@ public class PlayerController2D : MonoBehaviour
 
     private void WallSlideMovement()
     {
-        float verticalInput = Input.GetAxisRaw("Vertical");
         Vector2 velocity = _rb.linearVelocity;
 
-        if (Mathf.Abs(verticalInput) > 0.1f)
-        {
-            velocity.y = verticalInput * wallClimbSpeed;
-        }
-        else
+        if(_horizontalInput == 0)
         {
             if (velocity.y < -wallSlideSpeed)
             {
@@ -243,22 +245,6 @@ public class PlayerController2D : MonoBehaviour
         }
         _rb.linearVelocity = velocity;
     }
-
-    private void WallJump()
-    {
-        float direction = transform.localScale.x;
-        direction *= -1f;
-
-        Vector2 jumpVelocity = new Vector2(_rb.linearVelocity.x, wallJumpForce);
-        _rb.linearVelocity = jumpVelocity;
-
-        _isWallSliding = false;
-        _isTouchingWall = false;
-
-        if (_anim)
-            _anim.SetTrigger("Jump");
-    }
-
     // --------------------- Wall Bounce Fonksiyonları ---------------------
 
     private void StartWallBounce(int direction = 1)
