@@ -94,7 +94,7 @@ public class NPC2Controller : NPCBase
     {
         if (projectilePrefab != null && projectileSpawnPoint != null)
         {
-            GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0,0,Random.Range(0, 360)));
             Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
             if (projRb != null)
             {
