@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1621486660723077298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -219,7 +219,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 33554504
   chaseMemoryTime: 2
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   groundCheck: {fileID: 2305155984103685758}
   groundCheckRadius: 0.2
   groundLayer:
@@ -288,7 +290,7 @@ Transform:
   m_GameObject: {fileID: 7612564672178148826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0.37999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
