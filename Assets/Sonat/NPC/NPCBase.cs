@@ -100,6 +100,7 @@ public abstract class NPCBase : MonoBehaviour
     protected abstract void Patrol();
     protected abstract void ChaseAndAttack();
     protected abstract void AttackPlayer();
+    public abstract void GetDamage();
 
     void OnDrawGizmosSelected()
     {
@@ -109,4 +110,6 @@ public abstract class NPCBase : MonoBehaviour
         Gizmos.DrawLine(originUpper, originUpper + facingDirection * detectionRange);
         Gizmos.DrawLine(originLower, originLower + facingDirection * detectionRange);
     }
+
+
 }

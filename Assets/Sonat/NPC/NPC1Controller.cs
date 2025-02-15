@@ -94,4 +94,9 @@ public class NPC1Controller : NPCBase
     {
         Debug.Log("NPC1: Player'a saldýrýldý!");
     }
+
+    public override void GetDamage()
+    {
+        Destroy(gameObject);
+    }
 }

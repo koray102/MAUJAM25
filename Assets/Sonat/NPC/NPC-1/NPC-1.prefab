@@ -184,7 +184,7 @@ MonoBehaviour:
   detectionRayOffset: 0.6
   detectionLayerMask:
     serializedVersion: 2
-    m_Bits: 167772232
+    m_Bits: 33554504
   chaseMemoryTime: 5
   patrolPoints:
   - {fileID: 0}

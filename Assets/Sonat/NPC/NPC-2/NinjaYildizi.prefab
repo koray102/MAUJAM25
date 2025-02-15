@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8066689238387231481}
   - component: {fileID: -2852383309763803541}
   - component: {fileID: 4287869316100978397}
-  m_Layer: 28
+  m_Layer: 9
   m_Name: NinjaYildizi
   m_TagString: Untagged
   m_Icon: {fileID: 0}

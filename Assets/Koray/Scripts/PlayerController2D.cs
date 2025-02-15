@@ -94,6 +94,11 @@ public class PlayerController2D : MonoBehaviour
     private float _wallBounceTimeLeft;
     private float _lastWallBounceTime;
 
+    public ParticleSystem Ziplama;
+    public ParticleSystem Dusme;
+
+
+    public ParticleSystem Isilti;
 
     void Awake()
     {
@@ -194,7 +199,7 @@ public class PlayerController2D : MonoBehaviour
     void FixedUpdate()
     {
         // Zeminde miyiz kontrolü
-        CheckGround();
+        CheckGround(_isGrounded);
 
         // Duvar kontrolü
         CheckWall();
@@ -263,6 +268,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void StartWallBounce(int direction = 1)
     {
+        
         _isWallBouncing = true;
         _wallBounceTimeLeft = wallBounceDuration;
         _lastWallBounceTime = Time.time;
@@ -322,15 +328,22 @@ public class PlayerController2D : MonoBehaviour
         Vector2 velocity = _rb.linearVelocity;
         velocity.y = jumpForce;
         _rb.linearVelocity = velocity;
+        Ziplama.Play();
 
         if (_anim)
         _anim.SetTrigger("JumpUp"); // Yukarı zıplama animasyonu
     }
 
-    private void CheckGround()
+    private void CheckGround(bool eskiisGrounded)
     {
         Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+
         _isGrounded = (hit != null);
+        if (_isGrounded && !eskiisGrounded) 
+        {
+            Dusme.Play();
+        }
     }
 
     private void Flip()
@@ -410,6 +423,7 @@ public class PlayerController2D : MonoBehaviour
             if(obj.gameObject.layer == LayerMask.NameToLayer("Shuriken"))
             {
                 Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+                
                 if(rb != null)
                 {
                     // Karakterin facing yönünü al (örneğin, sağa bakıyorsa +1, sola -1)
@@ -422,11 +436,11 @@ public class PlayerController2D : MonoBehaviour
             else
             {
                 // Diğer objeler için, örneğin enemy varsa hasar verelim:
-                //Enemy enemyScript = obj.GetComponent<Enemy>();
-                //if(enemyScript != null)
-                //{
-                //    enemyScript.TakeDamage(attackDamage);
-                //}
+                NPCBase enemyScript = obj.GetComponent<NPCBase>();
+                if(enemyScript != null)
+                {
+                    enemyScript.GetDamage();
+                }
             }
         }
     }

@@ -110,4 +110,9 @@ public class NPC2Controller : NPCBase
     {
         Debug.Log("NPC2: Melee saldırı yapıldı!");
     }
+
+    public override void GetDamage()
+    {
+        Destroy(gameObject);
+    }
 }

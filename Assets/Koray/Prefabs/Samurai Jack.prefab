@@ -216,7 +216,7 @@ MonoBehaviour:
   attackRange: 1.78
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 67108864
   attackDamage: 10
   wallCheck: {fileID: 524542669630103181}
   wallCheckDistance: 0.2
