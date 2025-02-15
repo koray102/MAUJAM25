@@ -7,9 +7,12 @@ public class NPC2Controller : NPCBase
     public float idleTurnInterval = 2f;
     private float idleTurnTimer = 0f;
     public GameObject projectilePrefab;
-    public Transform projectileSpawnPoint;
+    public Transform SolSpawnPoint; 
+    public Transform SagSpawnPoint;
+    private Transform projectileSpawnPoint;
     public float projectileSpeed = 5f;
     public float meleeAttackRange = 0.5f;
+
 
     protected override void Patrol()
     {
@@ -29,6 +32,15 @@ public class NPC2Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
+        if (spriteRenderer.flipX && projectileSpawnPoint != SolSpawnPoint)
+        {
+            projectileSpawnPoint = SolSpawnPoint;
+        }
+        else if(!spriteRenderer.flipX && projectileSpawnPoint != SagSpawnPoint)
+        {
+            projectileSpawnPoint = SagSpawnPoint;
+        }
+
         float deltaX = player.position.x - transform.position.x;
         float absDeltaX = Mathf.Abs(deltaX);
 
@@ -86,11 +98,13 @@ public class NPC2Controller : NPCBase
             Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
             if (projRb != null)
             {
+                // İniş hızı veriliyor (velocity kullanıyoruz)
                 projRb.linearVelocity = facingDirection * projectileSpeed;
             }
             Debug.Log("NPC2: Projectile fırlatıldı.");
         }
     }
+
 
     void MeleeAttack()
     {
