@@ -116,20 +116,29 @@ public class PlayerController2D : MonoBehaviour
         // Zıplama
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (_isWallSliding && !_isGrounded)
-            {
-                //WallJump();
-            }
-            else if (_isGrounded && !_isAttacking)
+            if (_isGrounded)
             {
                 Jump();
             }
         }
 
         // Saldırı
-        if (Input.GetKeyDown(KeyCode.F) && !_isAttacking && _attackTimer <= 0f)
+        // Kombo saldırı denemesi
+        if (Input.GetKeyDown(KeyCode.F) && _attackTimer <= 0f)
         {
-            Attack();
+            AttemptComboAttack();
+        }
+
+        // Kombo süresi takibi
+        if (comboTimer > 0f)
+        {
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0f)
+            {
+                // Süre bitti, kombo sıfırlanır
+                inCombo = false;
+                lastAttackType = 0;
+            }
         }
 
         // Attack cooldown’u zamanla azalt
@@ -234,6 +243,10 @@ public class PlayerController2D : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.right * direction, wallCheckDistance, wallLayer);
 
         _isTouchingWall = (!_isGrounded && hit.collider != null);
+        if(_isTouchingWall)
+        {
+            Debug.Log(hit.collider.gameObject);
+        }
         _isWallSliding = _isTouchingWall;
     }
 
@@ -241,16 +254,17 @@ public class PlayerController2D : MonoBehaviour
     {
         Vector2 velocity = _rb.linearVelocity;
 
-        if(_horizontalInput == 0)
+        if (velocity.y < -wallSlideSpeed)
         {
-            if (velocity.y < -wallSlideSpeed)
-            {
-                velocity.y = -wallSlideSpeed;
-            }
+            velocity.y = -wallSlideSpeed;
         }
+        
         _rb.linearVelocity = velocity;
     }
-    // --------------------- Wall Bounce Fonksiyonları ---------------------
+
+    // =================================================
+    //=============== Wall Bounce Fonksiyonları ========
+    // =================================================
 
     private void StartWallBounce(int direction = 1)
     {
@@ -317,7 +331,7 @@ public class PlayerController2D : MonoBehaviour
         Ziplama.Play();
 
         if (_anim)
-            _anim.SetTrigger("Jump");
+        _anim.SetTrigger("JumpUp"); // Yukarı zıplama animasyonu
     }
 
     private void CheckGround(bool eskiisGrounded)
@@ -346,17 +360,58 @@ public class PlayerController2D : MonoBehaviour
     // =====================================================
     // ==================== Saldırı ========================
     // =====================================================
-    private void Attack()
+
+    private void AttemptComboAttack()
+    {
+        // Eğer komboda değilsek veya süre dolduysa ilk saldırı (1) ile başla
+        if (!inCombo || comboTimer <= 0f)
+        {
+            lastAttackType = 1;
+            inCombo = true;
+            StartAttack(1);
+        }
+        else
+        {
+            // Önceki saldırıyla aynı olmayan rastgele bir saldırı tipi seç (1,2,3)
+            int nextAttack = lastAttackType;
+            while (nextAttack == lastAttackType)
+            {
+                nextAttack = Random.Range(1, 4); // 1, 2 veya 3
+            }
+            lastAttackType = nextAttack;
+            StartAttack(nextAttack);
+        }
+
+        // Kombo süresini yenile
+        comboTimer = comboTimeout;
+    }
+
+
+    private void StartAttack(int attackType)
     {
         _isAttacking = true;
         _attackTimer = attackCooldown;
 
+        // Hangi saldırı tipiyse, Animator'da ilgili trigger'ı tetikle
         if (_anim)
-            _anim.SetTrigger("Attack");
+        {
+            // Aynı karede tetiklenme karışmasın diye önce resetliyoruz
+            _anim.ResetTrigger("Attack1");
+            _anim.ResetTrigger("Attack2");
+            _anim.ResetTrigger("Attack3");
 
+            if (attackType == 1)      _anim.SetTrigger("Attack1");
+            else if (attackType == 2) _anim.SetTrigger("Attack2");
+            else if (attackType == 3) _anim.SetTrigger("Attack3");
+        }
+
+        // Mevcut saldırı mantığı (hasar verme vb.)
         PerformAttack();
+
+        // Saldırı animasyon süresi bitince ResetAttack çağrılıyor
         Invoke(nameof(ResetAttack), attackDuration);
     }
+
 
     private void PerformAttack()
     {
@@ -371,10 +426,11 @@ public class PlayerController2D : MonoBehaviour
                 
                 if(rb != null)
                 {
-                    Instantiate(Isilti, obj.transform.position, Quaternion.identity);
-                    // Rastgele bir yön belirleyip kuvvet uyguluyoruz.
-                    Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-                    rb.AddForce(randomDirection * bulletThrowForce, ForceMode2D.Impulse);
+                    // Karakterin facing yönünü al (örneğin, sağa bakıyorsa +1, sola -1)
+                    float facing = Mathf.Sign(transform.localScale.x);
+                    // x bileşeni kesinlikle karakterin tersine, y bileşeni hafif rastgele (örnek: -0.5 ile 0.5 arası)
+                    Vector2 throwDirection = new Vector2(facing, Random.Range(-0.5f, 0.5f)).normalized;
+                    rb.AddForce(throwDirection * bulletThrowForce, ForceMode2D.Impulse);
                 }
             }
             else
@@ -403,10 +459,12 @@ public class PlayerController2D : MonoBehaviour
             return;
 
         _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
+        _anim.SetFloat("YAxisSpeed", Mathf.Abs(_rb.linearVelocity.y));
         _anim.SetBool("IsGrounded", _isGrounded);
         _anim.SetBool("IsRunning", _isRunning);
-        _anim.SetBool("IsWallSliding", _isWallSliding);
+        _anim.SetBool("IsWallSlidingDown", _isWallSliding);
         _anim.SetBool("IsDashing", _isDashing);
+        _anim.SetBool("IsFalling", !_isGrounded && _rb.linearVelocity.y < 0);
     }
 
     // =====================================================
