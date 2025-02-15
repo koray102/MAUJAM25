@@ -5,8 +5,22 @@ public class NPC4Controller : NPCBase
 {
     public bool isShielded = true;
     public KalkanScript Kalkan;
+    public Transform SolKalkanTutucu;
+    public Transform SagKalkanTutucu;
     protected override void Patrol()
     {
+        if (isShielded)
+        {
+            if (spriteRenderer.flipX && Kalkan.transform.position != SolKalkanTutucu.position)
+            {
+                Kalkan.transform.position = SolKalkanTutucu.position;
+            }
+            else if (!spriteRenderer.flipX && Kalkan.transform.position != SagKalkanTutucu.position)
+            {
+                Kalkan.transform.position = SagKalkanTutucu.position;
+            }
+        }
+
         if (patrolPoints.Length == 0)
             return;
 
@@ -26,6 +40,19 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
+        if(isShielded)
+        {
+            if (spriteRenderer.flipX && Kalkan.transform.position != SolKalkanTutucu.position)
+            {
+                Kalkan.transform.position = SolKalkanTutucu.position;
+            }
+            else if (!spriteRenderer.flipX && Kalkan.transform.position != SagKalkanTutucu.position)
+            {
+                Kalkan.transform.position = SagKalkanTutucu.position;
+            }
+        }
+
+
         // NPC ile oyuncu arasýndaki yatay mesafeyi hesapla
         float deltaX = player.position.x - transform.position.x;
 
@@ -101,11 +128,10 @@ public class NPC4Controller : NPCBase
     public override void GetDamage()
     {
         // Eðer oyuncu, NPC'nin baktýðý yönde ise (shield korumasý devrede) 
-        if (((facingDirection.x > 0 && player.position.x > transform.position.x) ||
-            (facingDirection.x < 0 && player.position.x < transform.position.x)) && isShielded)
-        {
-            Kalkan.Brake();
+        if (((!spriteRenderer.flipX && player.position.x > transform.position.x) || (spriteRenderer.flipX && player.position.x < transform.position.x)) && isShielded)
+        { 
             isShielded = false;
+            Kalkan.Brake();
         }
         else
         {
