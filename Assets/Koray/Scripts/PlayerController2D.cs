@@ -96,9 +96,9 @@ public class PlayerController2D : MonoBehaviour
 
     public ParticleSystem Ziplama;
     public ParticleSystem Dusme;
-
-
     public ParticleSystem Isilti;
+
+    public GameManagerScript gameManager;
 
     void Awake()
     {
@@ -495,6 +495,13 @@ public class PlayerController2D : MonoBehaviour
             Vector2 endPos = startPos + Vector2.right * direction * wallCheckDistance;
             Gizmos.DrawLine(startPos, endPos);
         }
+    }
+
+    public void GetHit()
+    {
+        //ölme ile ilgili animasyonlar
+
+        gameManager.SeviyeTekrari();
     }
 
 }
