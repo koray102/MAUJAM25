@@ -1,9 +1,24 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPC4Controller : NPCBase
 {
+    public ParticleSystem MetalImpact;
+    public Transform CarpismaTransformu;
+    public bool KalkanSolEldeMi = false;
     protected override void Patrol()
     {
+
+        if (spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = true;
+        }
+        else if (!spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = false;
+        }
+
+
         if (patrolPoints.Length == 0)
             return;
 
@@ -23,6 +38,16 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
+        if (spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = true;
+        }
+        else if (!spriteRenderer.flipX)
+        {
+            KalkanSolEldeMi = false;
+        }
+
+
         // NPC ile oyuncu arasýndaki yatay mesafeyi hesapla
         float deltaX = player.position.x - transform.position.x;
 
@@ -97,7 +122,15 @@ public class NPC4Controller : NPCBase
 
     public override void GetDamage()
     {
-        Destroy(gameObject);
+        // Eðer oyuncu, NPC'nin baktýðý yönde ise (shield korumasý devrede) 
+        if (!((!spriteRenderer.flipX && player.position.x > transform.position.x) || (spriteRenderer.flipX && player.position.x < transform.position.x)))
+        { 
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
+        }
     }
 }
 
