@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPC1Controller : NPCBase
+public class NPC4Controller : NPCBase
 {
     protected override void Patrol()
     {
@@ -100,3 +100,4 @@ public class NPC1Controller : NPCBase
         Destroy(gameObject);
     }
 }
+

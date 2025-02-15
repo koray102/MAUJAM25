@@ -94,6 +94,11 @@ public class PlayerController2D : MonoBehaviour
     private float _wallBounceTimeLeft;
     private float _lastWallBounceTime;
 
+    public ParticleSystem Ziplama;
+    public ParticleSystem Dusme;
+
+
+    public ParticleSystem Isilti;
 
     void Awake()
     {
@@ -185,7 +190,7 @@ public class PlayerController2D : MonoBehaviour
     void FixedUpdate()
     {
         // Zeminde miyiz kontrolü
-        CheckGround();
+        CheckGround(_isGrounded);
 
         // Duvar kontrolü
         CheckWall();
@@ -249,6 +254,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void StartWallBounce(int direction = 1)
     {
+        
         _isWallBouncing = true;
         _wallBounceTimeLeft = wallBounceDuration;
         _lastWallBounceTime = Time.time;
@@ -308,15 +314,22 @@ public class PlayerController2D : MonoBehaviour
         Vector2 velocity = _rb.linearVelocity;
         velocity.y = jumpForce;
         _rb.linearVelocity = velocity;
+        Ziplama.Play();
 
         if (_anim)
             _anim.SetTrigger("Jump");
     }
 
-    private void CheckGround()
+    private void CheckGround(bool eskiisGrounded)
     {
         Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+
         _isGrounded = (hit != null);
+        if (_isGrounded && !eskiisGrounded) 
+        {
+            Dusme.Play();
+        }
     }
 
     private void Flip()
@@ -355,8 +368,10 @@ public class PlayerController2D : MonoBehaviour
             if(obj.gameObject.layer == LayerMask.NameToLayer("Shuriken"))
             {
                 Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+                
                 if(rb != null)
                 {
+                    Instantiate(Isilti, obj.transform.position, Quaternion.identity);
                     // Rastgele bir yön belirleyip kuvvet uyguluyoruz.
                     Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
                     rb.AddForce(randomDirection * bulletThrowForce, ForceMode2D.Impulse);
@@ -365,11 +380,11 @@ public class PlayerController2D : MonoBehaviour
             else
             {
                 // Diğer objeler için, örneğin enemy varsa hasar verelim:
-                //Enemy enemyScript = obj.GetComponent<Enemy>();
-                //if(enemyScript != null)
-                //{
-                //    enemyScript.TakeDamage(attackDamage);
-                //}
+                NPCBase enemyScript = obj.GetComponent<NPCBase>();
+                if(enemyScript != null)
+                {
+                    enemyScript.GetDamage();
+                }
             }
         }
     }
