@@ -209,14 +209,14 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 33554497
   attackCooldown: 0.5
   attackDuration: 0.2
   attackPoint: {fileID: 4084985807263641730}
   attackRange: 0.7
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 67108864
   attackDamage: 10
   wallCheck: {fileID: 524542669630103181}
   wallCheckDistance: 0.4
