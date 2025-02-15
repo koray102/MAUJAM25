@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 981c884243675824190bbc8e0b8fd317
+guid: ebb6a90610b04fc4783a39c28dec9d8d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4685432607687114658
-    second: WALK4_0
+      213: -1042648970495267669
+    second: Walk4_0
   - first:
-      213: 3451452986652953091
-    second: WALK4_1
-  - first:
-      213: -2585113219441822545
-    second: WALK4_2
-  - first:
-      213: -3176813903428252907
-    second: WALK4_3
+      213: 6006305263579685609
+    second: Walk4_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,11 +49,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.53}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -135,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WALK4_0
+      name: Walk4_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 35
-        width: 1857
-        height: 1798
+        y: 0
+        width: 1866
+        height: 1865
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2aff838d120060140800000000000000
-      internalID: 4685432607687114658
+      spriteID: bace3381944c781f0800000000000000
+      internalID: -1042648970495267669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK4_1
+      name: Walk4_1
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1581
-        width: 8
-        height: 6
+        x: 1895
+        y: 1609
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,52 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30a096c643606ef20800000000000000
-      internalID: 3451452986652953091
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WALK4_2
-      rect:
-        serializedVersion: 2
-        x: 901
-        y: 16
-        width: 22
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fa4f0033935df1cd0800000000000000
-      internalID: -2585113219441822545
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WALK4_3
-      rect:
-        serializedVersion: 2
-        x: 958
-        y: 17
-        width: 11
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 51b03a81690b9e3d0800000000000000
-      internalID: -3176813903428252907
+      spriteID: 9e2e93080deaa5350800000000000000
+      internalID: 6006305263579685609
       vertices: []
       indices: 
       edges: []
@@ -226,8 +176,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1376d23518cfd1c4688c059546bf7f78
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -236,10 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALK4_0: 4685432607687114658
-      WALK4_1: 3451452986652953091
-      WALK4_2: -2585113219441822545
-      WALK4_3: -3176813903428252907
+      Walk4_0: -1042648970495267669
+      Walk4_1: 6006305263579685609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

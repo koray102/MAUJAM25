@@ -36,14 +36,12 @@ public class CheckBackground : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject);
         touchedLayers.Add(collision.gameObject.layer);
     }
 
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject);
         if(touchedLayers.Contains(collision.gameObject.layer))
         {
             touchedLayers.Remove(collision.gameObject.layer);

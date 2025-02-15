@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: 99cb0be13851ed241bc863b1d30cf8b9
+guid: 8218639b9bde6fc4c884ae6fa4d10b66
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6618096577871307699
-    second: WALK1_0
+      213: 6029122012342474912
+    second: Slide _0
   - first:
-      213: -5147269392560814108
-    second: WALK1_1
+      213: 7814160347901053782
+    second: Slide _1
   - first:
-      213: 3167636238944714760
-    second: WALK1_2
+      213: -8303369610425694738
+    second: Slide _2
+  - first:
+      213: 1221179521696498731
+    second: Slide _3
+  - first:
+      213: 7611089475007926696
+    second: Slide _4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -52,11 +58,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.33, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -81,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -132,13 +138,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WALK1_0
+      name: Slide _0
       rect:
         serializedVersion: 2
         x: 0
-        y: 20
-        width: 1857
-        height: 1813
+        y: 202
+        width: 1315
+        height: 2067
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4c90c20a3cc724a0800000000000000
-      internalID: -6618096577871307699
+      spriteID: 0a8592dc68ebba350800000000000000
+      internalID: 6029122012342474912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK1_1
+      name: Slide _1
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1581
-        width: 8
-        height: 6
+        x: 1267
+        y: 937
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e70c2542c93198b0800000000000000
-      internalID: -5147269392560814108
+      spriteID: 65bc59a6f69717c60800000000000000
+      internalID: 7814160347901053782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK1_2
+      name: Slide _2
       rect:
         serializedVersion: 2
-        x: 901
-        y: 16
-        width: 22
-        height: 11
+        x: 1243
+        y: 251
+        width: 23
+        height: 170
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,8 +197,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 80044ff5064b5fb20800000000000000
-      internalID: 3167636238944714760
+      spriteID: ee58dcb155184cc80800000000000000
+      internalID: -8303369610425694738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slide _3
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 201
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2483bd0e4082f010800000000000000
+      internalID: 1221179521696498731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slide _4
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 0
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1df8f5d8500a960800000000000000
+      internalID: 7611089475007926696
       vertices: []
       indices: 
       edges: []
@@ -201,8 +251,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 23f624157899a3e4a8ff6e22f5ce3f88
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -211,9 +261,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALK1_0: -6618096577871307699
-      WALK1_1: -5147269392560814108
-      WALK1_2: 3167636238944714760
+      Slide _0: 6029122012342474912
+      Slide _1: 7814160347901053782
+      Slide _2: -8303369610425694738
+      Slide _3: 1221179521696498731
+      Slide _4: 7611089475007926696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

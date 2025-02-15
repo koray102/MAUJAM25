@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 312e1e89a184b4e4685f9cd0c4a88a6a
+guid: e018534121869724aa4fa6b08516bcfc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5358156087590392599
-    second: WALK2_0
+      213: 1250808662612385756
+    second: Walk2_0
   - first:
-      213: -1740944407845316278
-    second: WALK2_1
+      213: 8113845950375717845
+    second: Walk2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,11 +49,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.535}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WALK2_0
+      name: Walk2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 20
-        width: 1857
-        height: 1813
+        y: 0
+        width: 1867
+        height: 1849
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,18 +144,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7131ceba29efb5a40800000000000000
-      internalID: 5358156087590392599
+      spriteID: cdf1ef00ad3cb5110800000000000000
+      internalID: 1250808662612385756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WALK2_1
+      name: Walk2_1
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1581
+        x: 1896
+        y: 1597
         width: 8
         height: 6
       alignment: 0
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a495da4f84ce6d7e0800000000000000
-      internalID: -1740944407845316278
+      spriteID: 5dbe26227eb2a9070800000000000000
+      internalID: 8113845950375717845
       vertices: []
       indices: 
       edges: []
@@ -176,8 +176,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a414518aa3413c848b53f328b693d9db
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -186,8 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALK2_0: 5358156087590392599
-      WALK2_1: -1740944407845316278
+      Walk2_0: 1250808662612385756
+      Walk2_1: 8113845950375717845
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

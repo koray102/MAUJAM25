@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 9898bc440856e4b4d9162ad56ee70d8f
+guid: a8ad67dc439173c49b9fdc9abc11d282
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7330289706176031675
-    second: 3ATTACK5_0
+      213: -3401153593979196860
+    second: Walk9_0
   - first:
-      213: -135889549034487035
-    second: 3ATTACK5_1
+      213: -890783779543927219
+    second: Walk9_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,7 +53,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.33, y: 0.295}
+  spritePivot: {x: 0.5, y: 0.54}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 3ATTACK5_0
+      name: Walk9_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1875
-        height: 2887
+        width: 1857
+        height: 1833
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbb235576ab6ab560800000000000000
-      internalID: 7330289706176031675
+      spriteID: 44aa35c83dcacc0d0800000000000000
+      internalID: -3401153593979196860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 3ATTACK5_1
+      name: Walk9_1
       rect:
         serializedVersion: 2
-        x: 800
-        y: 769
-        width: 1793
-        height: 2608
+        x: 1886
+        y: 1581
+        width: 8
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5038c15dc293d1ef0800000000000000
-      internalID: -135889549034487035
+      spriteID: d46ba904fdc43a3f0800000000000000
+      internalID: -890783779543927219
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      3ATTACK5_0: 7330289706176031675
-      3ATTACK5_1: -135889549034487035
+      Walk9_0: -3401153593979196860
+      Walk9_1: -890783779543927219
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
