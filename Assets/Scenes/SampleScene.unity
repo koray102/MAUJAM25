@@ -171,10 +171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NinjaYildizi
       objectReference: {fileID: 0}
-    - target: {fileID: 4287869316100978397, guid: 298cb28df1fc8764d9a10039573dcb01, type: 3}
-      propertyPath: OyuncuLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -948,10 +944,6 @@ PrefabInstance:
     - target: {fileID: 203146540716605023, guid: 5aea74ab3ded78b46a9dfce35b6a5cef, type: 3}
       propertyPath: m_Name
       value: NPC-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 203146540716605023, guid: 5aea74ab3ded78b46a9dfce35b6a5cef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270294040031133370, guid: 5aea74ab3ded78b46a9dfce35b6a5cef, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
