@@ -29,6 +29,8 @@ public abstract class NPCBase : MonoBehaviour
     public LayerMask groundLayer;
     protected bool isGrounded;
 
+    
+
     protected Transform player;
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;

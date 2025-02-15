@@ -1,7 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPC4Controller : NPCBase
 {
+    public bool isShielded = true;
+    public KalkanScript Kalkan;
     protected override void Patrol()
     {
         if (patrolPoints.Length == 0)
@@ -97,7 +100,17 @@ public class NPC4Controller : NPCBase
 
     public override void GetDamage()
     {
-        Destroy(gameObject);
+        // Eðer oyuncu, NPC'nin baktýðý yönde ise (shield korumasý devrede) 
+        if (((facingDirection.x > 0 && player.position.x > transform.position.x) ||
+            (facingDirection.x < 0 && player.position.x < transform.position.x)) && isShielded)
+        {
+            Kalkan.Brake();
+            isShielded = false;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
 

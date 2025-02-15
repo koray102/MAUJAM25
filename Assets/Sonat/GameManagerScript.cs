@@ -2,7 +2,7 @@ using System.Threading;
 using System;
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
     public int Level = 0;
@@ -28,11 +28,23 @@ public class GameManagerScript : MonoBehaviour
     public void SonrakiSeviye()
     {
         StartCoroutine(SmoothLerp(maxTransition, 1f));
+
+        Invoke("SonrakiSeviyeGecis", 2f);
+    }
+    private void SonrakiSeviyeGecis()
+    {
+
     }
 
     public void SeviyeTekrari()
     {
         StartCoroutine(SmoothLerp(maxTransition, 1f));
+
+        Invoke("SeviyeTekrariGecis", 2f);
+    }
+    private void SeviyeTekrariGecis()
+    {
+
     }
 
     IEnumerator SmoothLerp(float targetValue, float speed)
