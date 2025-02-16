@@ -8,6 +8,30 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_0.unity
+    guid: 10ceffaed968434499cdfba00677001e
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_1.unity
+    guid: f5182adf253511b4a80ad4e4085b1331
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_2.unity
+    guid: 88fe523a4de9f084c9c8249294f97202
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_3.unity
+    guid: f83db581329732345b69e83d8486f2f8
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_4.unity
+    guid: 66496f2d72182ba4facc725d3c5eea31
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_5.unity
+    guid: ee15262a62a43964b8f6caa29da07ed9
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_6.unity
+    guid: 5d9458113684f4c48b065cb10628b657
+  - enabled: 1
+    path: Assets/Sahneler/Sahne_7.unity
+    guid: c3999d719cd398548918139d5babd88b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
