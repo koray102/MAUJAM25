@@ -109,6 +109,22 @@ public class NPC4Controller : NPCBase
         TriggerAttackAnimation();
       
         Debug.Log("NPC1: Player'a sald�r�ld�!");
+
+
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        foreach (Collider2D obj in hitObjects)
+        {
+
+            if (obj.gameObject.layer == LayerMask.NameToLayer("Character"))
+            {
+                // Diğer objeler için, örneğin enemy varsa hasar verelim:
+                PlayerController2D playerScript = obj.GetComponent<PlayerController2D>();
+                if (playerScript != null)
+                {
+                    playerScript.Die();
+                }
+            }
+        }
     }
 
     public override void GetDamage()
@@ -124,6 +140,16 @@ public class NPC4Controller : NPCBase
         {
             Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
 
+        }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }

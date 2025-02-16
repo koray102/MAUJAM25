@@ -44,6 +44,8 @@ public abstract class NPCBase : MonoBehaviour
 
     protected CheckBackground visibleKontrol;
 
+    public Transform attackPoint;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -72,8 +74,9 @@ public abstract class NPCBase : MonoBehaviour
                     animator.SetBool("IsChasing", false);
                 }
                 Patrol();
-                if (IsPlayerDetected() && visibleKontrol.isVisible)
-                {
+                if (IsPlayerDetected() && (visibleKontrol.isVisible || gameObject.CompareTag("NPC-3")))
+                {   
+                    
                     state = NPCState.Chase;
                     chaseTimer = chaseMemoryTime;
                     chaseDirectionSign = (player.position.x - transform.position.x) >= 0 ? 1 : -1;
@@ -108,7 +111,7 @@ public abstract class NPCBase : MonoBehaviour
         
 
         return ((hitUpper.collider != null && hitUpper.collider.CompareTag("Player") ||
-               (hitLower.collider != null && hitLower.collider.CompareTag("Player"))) && visibleKontrol.isVisible);
+               (hitLower.collider != null && hitLower.collider.CompareTag("Player"))) && (visibleKontrol.isVisible || gameObject.CompareTag("NPC-3")));
     }
 
     protected void UpdateSpriteFlip()
