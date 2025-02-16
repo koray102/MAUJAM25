@@ -13,7 +13,10 @@ public class NPC3Controller : NPCBase
         lastFacingDirection = facingDirection;
         // Hareket etmiyor; pozisyon sabit kal�yor.
     }
+    protected override void ozelBaslangic()
+    {
 
+    }
     protected override void ChaseAndAttack()
     {   
 
