@@ -5,26 +5,32 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
-    public int Level = 0;
-    public Material TransitionMat;
 
     private Scene currentScene;
+    public String afterSceneName;
+
+
+    public Material TransitionMat;
 
     private float maskAmount = 1f;
-    private float minTransition = -0.1f;
+    private float minTransition = -0.11f;
     private float maxTransition = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TransitionMat.SetFloat("_MaskAmount", maskAmount);
-        StartCoroutine(SmoothLerp(minTransition, 0.6f));
+        StartCoroutine(SmoothLerp(minTransition, 1f));
         currentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(Input.GetKeyUp(KeyCode.M)) 
+        {
+            SonrakiSeviye();
+        }
+
     }
 
     public void SonrakiSeviye()
@@ -34,7 +40,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void SonrakiSeviyeGecis()
     {
-
+        SceneManager.LoadScene(afterSceneName);
     }
 
     public void SeviyeTekrari()
@@ -59,7 +65,7 @@ public class GameManagerScript : MonoBehaviour
         {
             // elapsed/duration, 0 ile 1 aras�nda gidip ge�i� oran�n� belirler.
             maskAmount = Mathf.Lerp(startValue, targetValue, elapsed / duration);
-            //Debug.Log("Current Value: " + maskAmount);
+            
             elapsed += Time.deltaTime;
 
             TransitionMat.SetFloat("_MaskAmount", maskAmount);
