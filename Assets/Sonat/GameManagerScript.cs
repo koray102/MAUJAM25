@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public Material TransitionMat;
 
     private float maskAmount = 1f;
-    private float minTransition = -0.11f;
+    private float minTransition = -0.2f;
     private float maxTransition = 1f;
 
     public SeviyeTamamlanmaControll SeviyeTamamlanmaControll;
@@ -46,9 +46,9 @@ public class GameManagerScript : MonoBehaviour
 
     public void SeviyeTekrari()
     {
-        StartCoroutine(SmoothLerp(maxTransition, 1f));
+        StartCoroutine(SmoothLerp(maxTransition, 0.2f));
 
-        Invoke("SeviyeTekrariGecis", 2f);
+        Invoke("SeviyeTekrariGecis", 3f);
     }
     private void SeviyeTekrariGecis()
     {

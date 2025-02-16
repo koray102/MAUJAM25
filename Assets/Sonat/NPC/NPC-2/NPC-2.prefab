@@ -227,7 +227,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 33554496
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 1700636281221557612}
+  gameManagerScript: {fileID: 0}
   allowIdleTurning: 0
   idleTurnInterval: 2
   projectilePrefab: {fileID: 4020625525890682907, guid: 298cb28df1fc8764d9a10039573dcb01, type: 3}
