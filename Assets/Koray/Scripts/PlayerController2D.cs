@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController2D : MonoBehaviour
 {
+    private bool didDie = false;
+
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
@@ -81,6 +83,14 @@ public class PlayerController2D : MonoBehaviour
     public AudioSource deathSound;
     public AudioClip deathSoundClip;
 
+    [Header("Camera Shake")]
+    public CameraShake camShakeSc;
+    public float dashCamShake;
+    public float dashCamShakeDuration;
+    public float hitCamShake;
+    public float hitCamShakeDuration;
+
+
     private float comboTimer = 0f;
     private bool inCombo = false;
     private int lastAttackType = 0;
@@ -125,6 +135,9 @@ public class PlayerController2D : MonoBehaviour
 
     void Update()
     {
+        if(didDie)
+            return;
+
         // Yatay girdi (A/D veya Sol/Sağ ok tuşları)
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         // Koşma tuşu
@@ -225,6 +238,9 @@ public class PlayerController2D : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(didDie)
+            return;
+
         // Zeminde miyiz kontrolü
         CheckGround(_isGrounded);
 
@@ -352,6 +368,8 @@ public class PlayerController2D : MonoBehaviour
 
         if(dashSoundClip != null && dashSoundClip != null)
         dashSound.PlayOneShot(dashSoundClip);
+
+        StartCoroutine(camShakeSc.Shake(dashCamShakeDuration, dashCamShake));
     }
 
     private void StopDash()
@@ -367,6 +385,7 @@ public class PlayerController2D : MonoBehaviour
     // =====================================================
     // =============== Normal Zıplama & Zemin ==============
     // =====================================================
+
     private void Jump()
     {
         Vector2 velocity = _rb.linearVelocity;
@@ -492,6 +511,9 @@ public class PlayerController2D : MonoBehaviour
                     // x bileşeni kesinlikle karakterin tersine, y bileşeni hafif rastgele (örnek: -0.5 ile 0.5 arası)
                     Vector2 throwDirection = new Vector2(facing, Random.Range(-0.5f, 0.5f)).normalized;
                     rb.AddForce(throwDirection * bulletThrowForce, ForceMode2D.Impulse);
+
+                    
+                    StartCoroutine(camShakeSc.Shake(hitCamShakeDuration, hitCamShake));
                 }
             }
             else
@@ -503,7 +525,9 @@ public class PlayerController2D : MonoBehaviour
                     enemyScript.GetDamage();
 
                     if(enemyHitSound != null && enemyHitSoundClip != null)
-                    enemyHitSound.PlayOneShot(enemyHitSoundClip);     
+                    enemyHitSound.PlayOneShot(enemyHitSoundClip);
+
+                    StartCoroutine(camShakeSc.Shake(hitCamShakeDuration, hitCamShake));
                 }
             }
         }
@@ -538,6 +562,10 @@ public class PlayerController2D : MonoBehaviour
 
     public void Die()
     {
+        if(didDie)
+            return;
+
+        didDie = true;
         if(deathSound != null && deathSoundClip != null)
         deathSound.PlayOneShot(deathSoundClip);
         
