@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class NPCBase : MonoBehaviour
@@ -41,6 +42,12 @@ public abstract class NPCBase : MonoBehaviour
 
     protected Animator animator;
 
+    protected CheckBackground visibleKontrol;
+
+    public Transform attackPoint;
+
+    public GameManagerScript gameManagerScript;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,6 +56,7 @@ public abstract class NPCBase : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
+        visibleKontrol = player.gameObject.GetComponent<CheckBackground>();
     }
 
     protected virtual void Update()
@@ -68,8 +76,9 @@ public abstract class NPCBase : MonoBehaviour
                     animator.SetBool("IsChasing", false);
                 }
                 Patrol();
-                if (IsPlayerDetected())
-                {
+                if (IsPlayerDetected() && (visibleKontrol.isVisible || gameObject.CompareTag("NPC-3")))
+                {   
+                    
                     state = NPCState.Chase;
                     chaseTimer = chaseMemoryTime;
                     chaseDirectionSign = (player.position.x - transform.position.x) >= 0 ? 1 : -1;
@@ -81,7 +90,12 @@ public abstract class NPCBase : MonoBehaviour
                     animator.SetBool("IsPatrolling", false);
                     animator.SetBool("IsChasing", true);
                 }
+
                 ChaseAndAttack();
+                
+
+               
+                    
                 break;
         }
 
@@ -95,8 +109,11 @@ public abstract class NPCBase : MonoBehaviour
         RaycastHit2D hitUpper = Physics2D.Raycast(originUpper, facingDirection, detectionRange, detectionLayerMask);
         RaycastHit2D hitLower = Physics2D.Raycast(originLower, facingDirection, detectionRange, detectionLayerMask);
 
-        return (hitUpper.collider != null && hitUpper.collider.CompareTag("Player")) ||
-               (hitLower.collider != null && hitLower.collider.CompareTag("Player"));
+        Debug.Log(visibleKontrol.isVisible);
+        
+
+        return ((hitUpper.collider != null && hitUpper.collider.CompareTag("Player") ||
+               (hitLower.collider != null && hitLower.collider.CompareTag("Player"))) && (visibleKontrol.isVisible || gameObject.CompareTag("NPC-3")));
     }
 
     protected void UpdateSpriteFlip()

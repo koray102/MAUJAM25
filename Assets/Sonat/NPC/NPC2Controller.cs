@@ -32,48 +32,51 @@ public class NPC2Controller : NPCBase
     protected override void ChaseAndAttack()
     {
 
-        float deltaX = player.position.x - transform.position.x;
-        float absDeltaX = Mathf.Abs(deltaX);
+            float deltaX = player.position.x - transform.position.x;
+            float absDeltaX = Mathf.Abs(deltaX);
 
-        // Her zaman oyuncuya bak, sadece x ekseninde hizalan.
-        facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
-        lastFacingDirection = facingDirection;
+            // Her zaman oyuncuya bak, sadece x ekseninde hizalan.
+            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+            lastFacingDirection = facingDirection;
 
-        // Eğer oyuncu melee menzili içindeyse melee saldırısı yap.
-        if (absDeltaX <= meleeAttackRange)
-        {
-            if (attackTimer <= 0f)
+            // Eğer oyuncu melee menzili içindeyse melee saldırısı yap.
+            if (absDeltaX <= meleeAttackRange)
             {
-                MeleeAttack();
-                attackTimer = attackCooldown;
+                if (attackTimer <= 0f)
+                {
+                    MeleeAttack();
+                    attackTimer = attackCooldown;
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
+            }
+            // Uzaktan saldırı: oyuncu melee mesafesinin dışında fakat attackRange içindeyse projectile fırlat.
+            else if (absDeltaX <= attackRange && visibleKontrol.isVisible)
+            {
+                if (attackTimer <= 0f)
+                {
+                    ShootProjectile();
+                    attackTimer = attackCooldown;
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
             }
             else
             {
-                attackTimer -= Time.deltaTime;
+                // Eğer oyuncu attackRange dışında ise sadece oyuncuya bakmaya devam et.
+                chaseTimer -= Time.deltaTime;
+                if (chaseTimer <= 0f)
+                {
+                    state = NPCState.Patrol;
+                }
+            
+
             }
-        }
-        // Uzaktan saldırı: oyuncu melee mesafesinin dışında fakat attackRange içindeyse projectile fırlat.
-        else if (absDeltaX <= attackRange)
-        {
-            if (attackTimer <= 0f)
-            {
-                ShootProjectile();
-                attackTimer = attackCooldown;
-            }
-            else
-            {
-                attackTimer -= Time.deltaTime;
-            }
-        }
-        else
-        {
-            // Eğer oyuncu attackRange dışında ise sadece oyuncuya bakmaya devam et.
-            chaseTimer -= Time.deltaTime;
-            if (chaseTimer <= 0f)
-            {
-                state = NPCState.Patrol;
-            }
-        }
+
     }
 
     protected override void AttackPlayer()
@@ -107,7 +110,7 @@ public class NPC2Controller : NPCBase
 
     public override void GetDamage()
     {
-  
+        gameManagerScript.OlumOldu();
         Destroy(gameObject);
     }
 }

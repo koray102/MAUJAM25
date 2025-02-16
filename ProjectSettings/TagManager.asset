@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - FxTemporaire
+  - NPC-3
   layers:
   - Default
   - TransparentFX

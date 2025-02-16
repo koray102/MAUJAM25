@@ -9,12 +9,13 @@ public class GameManagerScript : MonoBehaviour
     private Scene currentScene;
     public String afterSceneName;
 
-
     public Material TransitionMat;
 
     private float maskAmount = 1f;
     private float minTransition = -0.11f;
     private float maxTransition = 1f;
+
+    public SeviyeTamamlanmaControll SeviyeTamamlanmaControll;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -77,4 +78,14 @@ public class GameManagerScript : MonoBehaviour
         maskAmount = targetValue;
         Debug.Log("Hedefe ula��ld�!");
     }
+
+    public void OlumOldu()
+    {
+        if (SeviyeTamamlanmaControll.SeviyeBittiMi())
+        {
+            SeviyeTamamlanmaControll.SeviyeBittiEffectleriniAc();
+        }
+    }
+
+    
 }

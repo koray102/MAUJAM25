@@ -65,6 +65,22 @@ public class PlayerController2D : MonoBehaviour
     [Header("Combo Settings")]
     public float comboTimeout = 1f; // Komboyu devam ettirmek için max bekleme süresi
 
+    [Header("Audio Settings")]
+    public AudioSource walkSound;
+    public AudioClip walkSoundClip;
+    public AudioSource dashSound;
+    public AudioClip dashSoundClip;
+    public AudioSource attackSound1;
+    public AudioClip attackSoundClip1;
+    public AudioSource attackSound2;
+    public AudioClip attackSoundClip2;
+    public AudioSource attackSound3;
+    public AudioClip attackSoundClip3;
+    public AudioSource enemyHitSound;
+    public AudioClip enemyHitSoundClip;
+    public AudioSource deathSound;
+    public AudioClip deathSoundClip;
+
     private float comboTimer = 0f;
     private bool inCombo = false;
     private int lastAttackType = 0;
@@ -100,6 +116,7 @@ public class PlayerController2D : MonoBehaviour
 
     public GameManagerScript gameManager;
 
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -124,6 +141,11 @@ public class PlayerController2D : MonoBehaviour
             {
                 Jump();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Die();
         }
 
         // Saldırı
@@ -236,6 +258,25 @@ public class PlayerController2D : MonoBehaviour
         {
             Flip();
         }
+
+        // Yürüyüş sesi için kontrol
+        if (_isGrounded && Mathf.Abs(_horizontalInput) > 0.1f && !_isAttacking && !_isDashing)
+        {
+            if (!walkSound.isPlaying || walkSound.clip != walkSoundClip)
+            {
+                walkSound.loop = true;
+                walkSound.clip = walkSoundClip;
+                walkSound.Play();
+            }
+        }
+        else
+        {
+            if (walkSound.isPlaying && walkSound.clip == walkSoundClip)
+            {
+                walkSound.Stop();
+                walkSound.loop = false;
+            }
+        }
     }
 
     // =====================================================
@@ -308,6 +349,9 @@ public class PlayerController2D : MonoBehaviour
         {
             _anim.SetTrigger("Dash");
         }
+
+        if(dashSoundClip != null && dashSoundClip != null)
+        dashSound.PlayOneShot(dashSoundClip);
     }
 
     private void StopDash()
@@ -400,10 +444,26 @@ public class PlayerController2D : MonoBehaviour
             _anim.ResetTrigger("Attack2");
             _anim.ResetTrigger("Attack3");
 
-            if (attackType == 1) _anim.SetTrigger("Attack1");
-            else if (attackType == 2) _anim.SetTrigger("Attack2");
-            else if (attackType == 3) _anim.SetTrigger("Attack3");
+            if (attackType == 1)
+            {
+                _anim.SetTrigger("Attack1");
+                if(attackSound1 != null && attackSoundClip1 != null)
+                attackSound1.PlayOneShot(attackSoundClip1);
+
+            }else if (attackType == 2)
+            {
+                _anim.SetTrigger("Attack2");
+                if(attackSound2 != null && attackSoundClip2 != null)
+                attackSound2.PlayOneShot(attackSoundClip2);
+            }
+            else if (attackType == 3)
+            {
+                _anim.SetTrigger("Attack3");
+                if(attackSound3 != null && attackSoundClip3 != null)
+                attackSound3.PlayOneShot(attackSoundClip3);
+            }
         }
+        
 
         // Mevcut saldırı mantığı (hasar verme vb.)
         PerformAttack();
@@ -441,6 +501,9 @@ public class PlayerController2D : MonoBehaviour
                 if (enemyScript != null)
                 {
                     enemyScript.GetDamage();
+
+                    if(enemyHitSound != null && enemyHitSoundClip != null)
+                    enemyHitSound.PlayOneShot(enemyHitSoundClip);     
                 }
             }
         }
@@ -469,6 +532,17 @@ public class PlayerController2D : MonoBehaviour
         _anim.SetBool("IsFalling", !_isGrounded && _rb.linearVelocity.y < 0);
     }
 
+    // =====================================================
+    // =================== Animasyon =======================
+    // =====================================================
+
+    public void Die()
+    {
+        if(deathSound != null && deathSoundClip != null)
+        deathSound.PlayOneShot(deathSoundClip);
+
+        _anim.SetTrigger("Die");
+    }
 
     // =====================================================
     // =================== Gizmos Debug ====================
