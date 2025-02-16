@@ -40,59 +40,67 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if (gameObject.transform.localScale.x > 0)
-            KalkanSolEldeMi = false;
-        else
-            KalkanSolEldeMi = true;
 
-        float deltaX = player.position.x - transform.position.x;
-        bool detected = IsPlayerDetected();
+            if (gameObject.transform.localScale.x > 0)
+                KalkanSolEldeMi = false;
+            else
+                KalkanSolEldeMi = true;
 
-        if (detected)
-        {
-            // Chase animasyonu tetikleniyor.
+            float deltaX = player.position.x - transform.position.x;
+            bool detected = IsPlayerDetected();
+
+            if (detected && visibleKontrol.isVisible)
+            {
+                // Chase animasyonu tetikleniyor.
          
 
-            chaseTimer = chaseMemoryTime;
-            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
-            lastFacingDirection = facingDirection;
+                chaseTimer = chaseMemoryTime;
+                facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+                lastFacingDirection = facingDirection;
 
-            if (Mathf.Abs(deltaX) > attackRange)
-            {
-                Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
-                transform.position = newPos;
-            }
-            else
-            {
-                if (attackTimer <= 0f)
+                if (Mathf.Abs(deltaX) > attackRange)
                 {
-                    AttackPlayer();
-                    attackTimer = attackCooldown;
+                    Vector2 newPos = transform.position;
+                    newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
+                    transform.position = newPos;
                 }
                 else
                 {
-                    attackTimer -= Time.deltaTime;
+                    if (attackTimer <= 0f)
+                    {
+                        AttackPlayer();
+                        attackTimer = attackCooldown;
+                    }
+                    else
+                    {
+                        attackTimer -= Time.deltaTime;
+                    }
                 }
             }
-        }
-        else
-        {
-            chaseTimer -= Time.deltaTime;
-            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
-            lastFacingDirection = facingDirection;
+            else
+            {
+                chaseTimer -= Time.deltaTime;
+                facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+                lastFacingDirection = facingDirection;
 
-            if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange)
-            {
-                Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
-                transform.position = newPos;
+                if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange && visibleKontrol.isVisible)
+                {
+                    Vector2 newPos = transform.position;
+                    newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
+                    transform.position = newPos;
+                }else if(chaseTimer > 0 && visibleKontrol.isVisible)
+                {
+
+                }
+                else
+                {
+                    state = NPCState.Patrol;
+                }
             }
-            else if (chaseTimer <= 0f)
-            {
-                state = NPCState.Patrol;
-            }
-        }
+
+        
+
+
     }
 
     protected override void AttackPlayer()
@@ -101,6 +109,22 @@ public class NPC4Controller : NPCBase
         TriggerAttackAnimation();
       
         Debug.Log("NPC1: Player'a sald�r�ld�!");
+
+
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        foreach (Collider2D obj in hitObjects)
+        {
+
+            if (obj.gameObject.layer == LayerMask.NameToLayer("Character"))
+            {
+                // Diğer objeler için, örneğin enemy varsa hasar verelim:
+                PlayerController2D playerScript = obj.GetComponent<PlayerController2D>();
+                if (playerScript != null)
+                {
+                    playerScript.Die();
+                }
+            }
+        }
     }
 
     public override void GetDamage()
@@ -116,6 +140,16 @@ public class NPC4Controller : NPCBase
         {
             Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
 
+        }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }
