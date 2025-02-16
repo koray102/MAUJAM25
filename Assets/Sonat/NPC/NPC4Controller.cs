@@ -6,6 +6,8 @@ public class NPC4Controller : NPCBase
     public ParticleSystem MetalImpact;
     public Transform CarpismaTransformu;
     public bool KalkanSolEldeMi = false;
+
+    
     protected override void Patrol()
     {
 
@@ -18,6 +20,7 @@ public class NPC4Controller : NPCBase
             KalkanSolEldeMi = false;
         }
 
+        animator.SetTrigger("Patrol");
 
         if (patrolPoints.Length == 0)
             return;
@@ -47,7 +50,7 @@ public class NPC4Controller : NPCBase
             KalkanSolEldeMi = false;
         }
 
-
+        
         // NPC ile oyuncu arasýndaki yatay mesafeyi hesapla
         float deltaX = player.position.x - transform.position.x;
 
@@ -56,6 +59,7 @@ public class NPC4Controller : NPCBase
 
         if (detected)
         {
+            animator.SetTrigger("Chase");
             // Chase zamanlayýcýsýný sýfýrla
             chaseTimer = chaseMemoryTime;
 
@@ -117,6 +121,7 @@ public class NPC4Controller : NPCBase
 
     protected override void AttackPlayer()
     {
+        animator.SetTrigger("Attack");
         Debug.Log("NPC1: Player'a saldýrýldý!");
     }
 
@@ -124,7 +129,8 @@ public class NPC4Controller : NPCBase
     {
         // Eðer oyuncu, NPC'nin baktýðý yönde ise (shield korumasý devrede) 
         if (!((!spriteRenderer.flipX && player.position.x > transform.position.x) || (spriteRenderer.flipX && player.position.x < transform.position.x)))
-        { 
+        {
+            animator.SetTrigger("Die");
             Destroy(gameObject);
         }
         else
