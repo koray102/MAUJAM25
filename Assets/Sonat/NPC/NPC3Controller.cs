@@ -42,12 +42,14 @@ public class NPC3Controller : NPCBase
 
     protected override void AttackPlayer()
     {
+        animator.SetTrigger("Attack");
         Debug.Log("NPC-3: Player'a saldýrýldý!");
         // Buraya oyuncuya hasar verme veya saldýrý animasyonu eklenebilir.
     }
 
     public override void GetDamage()
     {
+        animator.SetTrigger("Die");
         Destroy(gameObject);
     }
 }

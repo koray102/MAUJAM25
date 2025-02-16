@@ -20,6 +20,7 @@ public class NPC2Controller : NPCBase
         // Idle turning açıksa, belirli aralıklarla yönünü tersine çevirir.
         if (allowIdleTurning)
         {
+            animator.SetTrigger("Idle");
             idleTurnTimer -= Time.deltaTime;
             if (idleTurnTimer <= 0f)
             {
@@ -94,6 +95,7 @@ public class NPC2Controller : NPCBase
     {
         if (projectilePrefab != null && projectileSpawnPoint != null)
         {
+            animator.SetTrigger("Shoot");
             GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0,0,Random.Range(0, 360)));
             Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
             if (projRb != null)
@@ -113,6 +115,7 @@ public class NPC2Controller : NPCBase
 
     public override void GetDamage()
     {
+        animator.SetTrigger("Die");
         Destroy(gameObject);
     }
 }

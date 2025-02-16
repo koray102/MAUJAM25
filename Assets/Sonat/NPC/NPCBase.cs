@@ -41,6 +41,7 @@ public abstract class NPCBase : MonoBehaviour
     protected Vector2 facingDirection = Vector2.right;
     protected Vector2 lastFacingDirection = Vector2.right;
 
+    protected Animator animator;
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
