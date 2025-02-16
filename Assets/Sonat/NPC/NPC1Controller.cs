@@ -4,7 +4,7 @@ public class NPC1Controller : NPCBase
 {
     protected override void Patrol()
     {
-        animator.SetTrigger("Patrol");
+   
 
         if (patrolPoints.Length == 0)
             return;
@@ -33,7 +33,7 @@ public class NPC1Controller : NPCBase
 
         if (detected)
         {
-            animator.SetTrigger("Chase");
+            
             // Chase zamanlayýcýsýný sýfýrla
             chaseTimer = chaseMemoryTime;
 
@@ -95,13 +95,13 @@ public class NPC1Controller : NPCBase
 
     protected override void AttackPlayer()
     {
-        animator.SetTrigger("Attack");
+
         Debug.Log("NPC1: Player'a saldýrýldý!");
     }
 
     public override void GetDamage()
     {
-        animator.SetTrigger("Die");
+
         Destroy(gameObject);
     }
 }

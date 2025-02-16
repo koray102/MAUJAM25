@@ -8,7 +8,7 @@ public class NPC4Controller : NPCBase
     public bool KalkanSolEldeMi = false;
 
     // Animator referansý ekleniyor.
-    protected Animator animator;
+   
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class NPC4Controller : NPCBase
             KalkanSolEldeMi = false;
 
         // Patrol animasyonu tetikleniyor.
-        animator.SetTrigger("Patrol");
+        
 
         if (patrolPoints.Length == 0)
             return;
@@ -57,7 +57,7 @@ public class NPC4Controller : NPCBase
         if (detected)
         {
             // Chase animasyonu tetikleniyor.
-            animator.SetTrigger("Chase");
+         
 
             chaseTimer = chaseMemoryTime;
             facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
@@ -104,7 +104,7 @@ public class NPC4Controller : NPCBase
     protected override void AttackPlayer()
     {
         // Attack animasyonu tetikleniyor.
-        animator.SetTrigger("Attack");
+      
         Debug.Log("NPC1: Player'a saldýrýldý!");
     }
 
@@ -114,7 +114,7 @@ public class NPC4Controller : NPCBase
         if (!((!spriteRenderer.flipX && player.position.x > transform.position.x) ||
               (spriteRenderer.flipX && player.position.x < transform.position.x)))
         {
-            animator.SetTrigger("Die");
+      
             Destroy(gameObject);
         }
         else
