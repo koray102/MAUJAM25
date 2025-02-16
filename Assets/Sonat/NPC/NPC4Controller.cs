@@ -40,59 +40,67 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if (gameObject.transform.localScale.x > 0)
-            KalkanSolEldeMi = false;
-        else
-            KalkanSolEldeMi = true;
 
-        float deltaX = player.position.x - transform.position.x;
-        bool detected = IsPlayerDetected();
+            if (gameObject.transform.localScale.x > 0)
+                KalkanSolEldeMi = false;
+            else
+                KalkanSolEldeMi = true;
 
-        if (detected)
-        {
-            // Chase animasyonu tetikleniyor.
+            float deltaX = player.position.x - transform.position.x;
+            bool detected = IsPlayerDetected();
+
+            if (detected && visibleKontrol.isVisible)
+            {
+                // Chase animasyonu tetikleniyor.
          
 
-            chaseTimer = chaseMemoryTime;
-            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
-            lastFacingDirection = facingDirection;
+                chaseTimer = chaseMemoryTime;
+                facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+                lastFacingDirection = facingDirection;
 
-            if (Mathf.Abs(deltaX) > attackRange)
-            {
-                Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
-                transform.position = newPos;
-            }
-            else
-            {
-                if (attackTimer <= 0f)
+                if (Mathf.Abs(deltaX) > attackRange)
                 {
-                    AttackPlayer();
-                    attackTimer = attackCooldown;
+                    Vector2 newPos = transform.position;
+                    newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
+                    transform.position = newPos;
                 }
                 else
                 {
-                    attackTimer -= Time.deltaTime;
+                    if (attackTimer <= 0f)
+                    {
+                        AttackPlayer();
+                        attackTimer = attackCooldown;
+                    }
+                    else
+                    {
+                        attackTimer -= Time.deltaTime;
+                    }
                 }
             }
-        }
-        else
-        {
-            chaseTimer -= Time.deltaTime;
-            facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
-            lastFacingDirection = facingDirection;
+            else
+            {
+                chaseTimer -= Time.deltaTime;
+                facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
+                lastFacingDirection = facingDirection;
 
-            if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange)
-            {
-                Vector2 newPos = transform.position;
-                newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
-                transform.position = newPos;
+                if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange && visibleKontrol.isVisible)
+                {
+                    Vector2 newPos = transform.position;
+                    newPos.x = Mathf.MoveTowards(transform.position.x, player.position.x, chaseSpeed * Time.deltaTime);
+                    transform.position = newPos;
+                }else if(chaseTimer > 0 && visibleKontrol.isVisible)
+                {
+
+                }
+                else
+                {
+                    state = NPCState.Patrol;
+                }
             }
-            else if (chaseTimer <= 0f)
-            {
-                state = NPCState.Patrol;
-            }
-        }
+
+        
+
+
     }
 
     protected override void AttackPlayer()

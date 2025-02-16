@@ -15,7 +15,8 @@ public class NPC3Controller : NPCBase
     }
 
     protected override void ChaseAndAttack()
-    {
+    {   
+
         // NPC-3, chase moduna ge�ti�inde da ayn� yerde kal�r.
         // Yaln�zca oyuncunun x pozisyonuna g�re y�z�n� ayarlar ve
         // e�er oyuncu attackRange i�inde ise sald�r�r.

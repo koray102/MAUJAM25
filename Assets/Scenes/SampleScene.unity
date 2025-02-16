@@ -1050,11 +1050,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2607083459192795508, guid: 60cafeed1a63b394eaacc9e7f3442d0d, type: 3}
   m_PrefabInstance: {fileID: 7987967650891010246}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1121558686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9155581462705844122, guid: 499238a9adbe1554cabe9d4bae559bbf, type: 3}
-  m_PrefabInstance: {fileID: 1752457467}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1148142380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1069,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516508102152981363, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8183877292847940923, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
