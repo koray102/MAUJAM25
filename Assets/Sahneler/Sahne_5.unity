@@ -1126,13 +1126,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC-2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4516508102152981363, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8183877292847940923, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: gameManagerScript
       value: 
       objectReference: {fileID: 1858435305}
     - target: {fileID: 8657537792849165120, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.40056
+      value: 15.45056
       objectReference: {fileID: 0}
     - target: {fileID: 8657537792849165120, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2847,9 +2851,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700636281221557612, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.27
+      objectReference: {fileID: 0}
     - target: {fileID: 4516508102152981363, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_Name
       value: NPC-2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516508102152981363, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8183877292847940923, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: gameManagerScript
@@ -2857,11 +2869,11 @@ PrefabInstance:
       objectReference: {fileID: 1858435305}
     - target: {fileID: 8657537792849165120, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.87
+      value: 14.94
       objectReference: {fileID: 0}
     - target: {fileID: 8657537792849165120, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.38
+      value: -5.31
       objectReference: {fileID: 0}
     - target: {fileID: 8657537792849165120, guid: e73725c2a0f61944988a074ab42c686a, type: 3}
       propertyPath: m_LocalPosition.z
