@@ -7,9 +7,7 @@ public class NPC2Controller : NPCBase
     public float idleTurnInterval = 2f;
     private float idleTurnTimer = 0f;
     public GameObject projectilePrefab;
-    public Transform SolSpawnPoint; 
-    public Transform SagSpawnPoint;
-    private Transform projectileSpawnPoint;
+    public Transform projectileSpawnPoint;
     public float projectileSpeed = 5f;
     public float meleeAttackRange = 0.5f;
 
@@ -20,7 +18,7 @@ public class NPC2Controller : NPCBase
         // Idle turning açıksa, belirli aralıklarla yönünü tersine çevirir.
         if (allowIdleTurning)
         {
-            animator.SetTrigger("Idle");
+   
             idleTurnTimer -= Time.deltaTime;
             if (idleTurnTimer <= 0f)
             {
@@ -33,14 +31,6 @@ public class NPC2Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if (spriteRenderer.flipX && projectileSpawnPoint != SolSpawnPoint)
-        {
-            projectileSpawnPoint = SolSpawnPoint;
-        }
-        else if(!spriteRenderer.flipX && projectileSpawnPoint != SagSpawnPoint)
-        {
-            projectileSpawnPoint = SagSpawnPoint;
-        }
 
         float deltaX = player.position.x - transform.position.x;
         float absDeltaX = Mathf.Abs(deltaX);
@@ -95,7 +85,7 @@ public class NPC2Controller : NPCBase
     {
         if (projectilePrefab != null && projectileSpawnPoint != null)
         {
-            animator.SetTrigger("Shoot");
+  
             GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0,0,Random.Range(0, 360)));
             Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
             if (projRb != null)
@@ -115,7 +105,7 @@ public class NPC2Controller : NPCBase
 
     public override void GetDamage()
     {
-        animator.SetTrigger("Die");
+  
         Destroy(gameObject);
     }
 }

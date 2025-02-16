@@ -4,6 +4,8 @@ public class NPC1Controller : NPCBase
 {
     protected override void Patrol()
     {
+   
+
         if (patrolPoints.Length == 0)
             return;
 
@@ -31,6 +33,7 @@ public class NPC1Controller : NPCBase
 
         if (detected)
         {
+            
             // Chase zamanlay�c�s�n� s�f�rla
             chaseTimer = chaseMemoryTime;
 
@@ -92,7 +95,7 @@ public class NPC1Controller : NPCBase
 
     protected override void AttackPlayer()
     {
-        TriggerAttackAnimation();
+
         Debug.Log("NPC1: Player'a sald�r�ld�!");
     }
 
