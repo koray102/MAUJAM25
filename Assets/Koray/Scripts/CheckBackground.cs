@@ -4,6 +4,9 @@ using UnityEngine;
 public class CheckBackground : MonoBehaviour
 {
     [SerializeField] private int visibleLayer;
+    [SerializeField] private float visibleDelay = 1f; // Temasın algılanması için gecikme süresi (saniye cinsinden)
+    private float visibleTimer = 0f;
+
     public HashSet<int> touchedLayers = new HashSet<int>();
     internal bool isVisible;
     
@@ -16,23 +19,38 @@ public class CheckBackground : MonoBehaviour
 
     void Update()
     {
-        isVisible = IsNotTouchingVisibleLayer();
-    }
-
-
-    public bool IsNotTouchingVisibleLayer()
+        if (IsTouchingVisibleLayer())
     {
-        foreach (var hit in touchedLayers)
+        visibleTimer += Time.deltaTime;
+        if (visibleTimer >= visibleDelay)
         {
-            // Kendi objemizi kontrol dışı bırakıyoruz.
-            if (hit == gameObject.layer)
-                continue;
-
-            if (hit == visibleLayer)
-                return true;
+            isVisible = true;
         }
-        return false;
+        else
+        {
+            isVisible = false;
+        }
     }
+    else
+    {
+        visibleTimer = 0f;
+        isVisible = false;
+    }
+    }
+
+
+    private bool IsTouchingVisibleLayer()
+{
+    foreach (int layer in touchedLayers)
+    {
+        if (layer == gameObject.layer)
+            continue;
+        if (layer == visibleLayer)
+            return true;
+    }
+    return false;
+}
+
 
     void OnTriggerEnter2D(Collider2D collision)
     {

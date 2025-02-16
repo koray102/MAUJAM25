@@ -469,6 +469,14 @@ public class PlayerController2D : MonoBehaviour
         _anim.SetBool("IsFalling", !_isGrounded && _rb.linearVelocity.y < 0);
     }
 
+    // =====================================================
+    // =================== Animasyon =======================
+    // =====================================================
+
+    public void Die()
+    {
+        _anim.SetTrigger("Die");
+    }
 
     // =====================================================
     // =================== Gizmos Debug ====================
