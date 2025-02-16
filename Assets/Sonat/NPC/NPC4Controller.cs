@@ -4,6 +4,8 @@ using UnityEngine;
 public class NPC4Controller : NPCBase
 {
     public ParticleSystem MetalImpact;
+    public AudioSource MetalImpactSource;
+    public AudioClip MetalImpactClip;
     public Transform CarpismaTransformu;
     public bool KalkanSolEldeMi = false;
 
@@ -138,8 +140,10 @@ public class NPC4Controller : NPCBase
         }
         else
         {
-            Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
+            if(MetalImpactSource != null && MetalImpactClip != null)
+                MetalImpactSource.PlayOneShot(MetalImpactClip);
 
+            Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
         }
     }
 

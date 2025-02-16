@@ -20,36 +20,36 @@ public class CheckBackground : MonoBehaviour
     void Update()
     {
         if (IsTouchingVisibleLayer())
-    {
-        visibleTimer += Time.deltaTime;
-        if (visibleTimer >= visibleDelay)
         {
-            isVisible = true;
+            visibleTimer += Time.deltaTime;
+            if (visibleTimer >= visibleDelay)
+            {
+                isVisible = true;
+            }
+            else
+            {
+                isVisible = false;
+            }
         }
         else
         {
+            visibleTimer = 0f;
             isVisible = false;
         }
-    }
-    else
-    {
-        visibleTimer = 0f;
-        isVisible = false;
-    }
     }
 
 
     private bool IsTouchingVisibleLayer()
-{
-    foreach (int layer in touchedLayers)
     {
-        if (layer == gameObject.layer)
-            continue;
-        if (layer == visibleLayer)
-            return true;
+        foreach (int layer in touchedLayers)
+        {
+            if (layer == gameObject.layer)
+                continue;
+            if (layer == visibleLayer)
+                return true;
+        }
+        return false;
     }
-    return false;
-}
 
 
     void OnTriggerEnter2D(Collider2D collision)
