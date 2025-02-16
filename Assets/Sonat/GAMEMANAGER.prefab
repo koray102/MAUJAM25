@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a4a90dd92fb6041857a2cea9bb04d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 0
+  afterSceneName: SampleScene
   TransitionMat: {fileID: 2100000, guid: 5830cb32f5c2f9f48b6c563e4795f8c8, type: 2}
+  SeviyeTamamlanmaControll: {fileID: 0}

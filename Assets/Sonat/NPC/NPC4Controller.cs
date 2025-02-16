@@ -25,7 +25,7 @@ public class NPC4Controller : NPCBase
             return;
 
         Transform targetPoint = patrolPoints[currentPatrolIndex];
-        if (Vector2.Distance(transform.position, targetPoint.position) > 0.1f)
+        if (Vector2.Distance(transform.position, targetPoint.position) > 0.6f)
         {
             facingDirection = (targetPoint.position.x - transform.position.x) >= 0 ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
@@ -133,7 +133,7 @@ public class NPC4Controller : NPCBase
         if (!((!KalkanSolEldeMi && player.position.x > transform.position.x) ||
               (KalkanSolEldeMi && player.position.x < transform.position.x)))
         {
-           
+            gameManagerScript.OlumOldu();
             Destroy(gameObject);
         }
         else

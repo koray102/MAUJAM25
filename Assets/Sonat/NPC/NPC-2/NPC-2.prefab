@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2251337805955106193}
   m_Layer: 26
   m_Name: NPC-2
-  m_TagString: Untagged
+  m_TagString: NPC-2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 33554496
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 1700636281221557612}
+  gameManagerScript: {fileID: 0}
   allowIdleTurning: 0
   idleTurnInterval: 2
   projectilePrefab: {fileID: 4020625525890682907, guid: 298cb28df1fc8764d9a10039573dcb01, type: 3}

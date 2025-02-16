@@ -9,18 +9,22 @@ public class GameManagerScript : MonoBehaviour
     private Scene currentScene;
     public String afterSceneName;
 
-
     public Material TransitionMat;
 
     private float maskAmount = 1f;
-    private float minTransition = -0.11f;
+    private float minTransition = -1f;
     private float maxTransition = 1f;
+
+    public SeviyeTamamlanmaControll SeviyeTamamlanmaControll;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TransitionMat.SetFloat("_MaskAmount", maskAmount);
-        StartCoroutine(SmoothLerp(minTransition, 1f));
         currentScene = SceneManager.GetActiveScene();
+
+        StartCoroutine(SmoothLerp(minTransition, 1f));
+    
+        
     }
 
     // Update is called once per frame
@@ -36,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     public void SonrakiSeviye()
     {
         StartCoroutine(SmoothLerp(maxTransition, 1f));
+        
         Invoke("SonrakiSeviyeGecis", 2f);
     }
     private void SonrakiSeviyeGecis()
@@ -45,9 +50,9 @@ public class GameManagerScript : MonoBehaviour
 
     public void SeviyeTekrari()
     {
-        StartCoroutine(SmoothLerp(maxTransition, 1f));
+        StartCoroutine(SmoothLerp(maxTransition, 0.2f));
 
-        Invoke("SeviyeTekrariGecis", 2f);
+        Invoke("SeviyeTekrariGecis", 3f);
     }
     private void SeviyeTekrariGecis()
     {
@@ -77,4 +82,14 @@ public class GameManagerScript : MonoBehaviour
         maskAmount = targetValue;
         Debug.Log("Hedefe ula��ld�!");
     }
+
+    public void OlumOldu()
+    {
+        if (SeviyeTamamlanmaControll.SeviyeBittiMi())
+        {
+            SeviyeTamamlanmaControll.SeviyeBittiEffectleriniAc();
+        }
+    }
+
+    
 }
