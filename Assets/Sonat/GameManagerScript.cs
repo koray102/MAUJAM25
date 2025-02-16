@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public Material TransitionMat;
 
     private float maskAmount = 1f;
-    private float minTransition = -0.2f;
+    private float minTransition = -1f;
     private float maxTransition = 1f;
 
     public SeviyeTamamlanmaControll SeviyeTamamlanmaControll;
@@ -20,8 +20,11 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         TransitionMat.SetFloat("_MaskAmount", maskAmount);
-        StartCoroutine(SmoothLerp(minTransition, 1f));
         currentScene = SceneManager.GetActiveScene();
+
+        StartCoroutine(SmoothLerp(minTransition, 1f));
+    
+        
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     public void SonrakiSeviye()
     {
         StartCoroutine(SmoothLerp(maxTransition, 1f));
+        
         Invoke("SonrakiSeviyeGecis", 2f);
     }
     private void SonrakiSeviyeGecis()

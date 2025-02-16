@@ -123,10 +123,10 @@ public abstract class NPCBase : MonoBehaviour
             // E�er NPC'nin bak�� y�n� sola ise flipX true olur.
             if(facingDirection.x < 0)
             {
-                gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                gameObject.transform.localScale = new Vector3(-2, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             }else if (facingDirection.x > 0)
             {
-                gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                gameObject.transform.localScale = new Vector3(2, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             }
 
         }
