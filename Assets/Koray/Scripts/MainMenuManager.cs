@@ -24,16 +24,13 @@ public class MainMenuManager : MonoBehaviour
         exitButton.onClick.AddListener(ExitGame);
 
         // Slider değişikliğinde ses ayarını yapalım:
-        volumeSlider.onValueChanged.AddListener(SetVolume);
+        
 
         // Options panel başlangıçta kapalı olsun:
-        optionsPanel.SetActive(false);
+        
 
         // Slider değerini mevcut ses seviyesine eşitleyelim:
-        if (backgroundMusic != null)
-        {
-            volumeSlider.value = backgroundMusic.volume;
-        }
+    
     }
 
     void StartGame()
