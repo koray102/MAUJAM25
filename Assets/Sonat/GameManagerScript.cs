@@ -26,7 +26,7 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.E)) 
+        if(Input.GetKeyUp(KeyCode.M)) 
         {
             SonrakiSeviye();
         }
