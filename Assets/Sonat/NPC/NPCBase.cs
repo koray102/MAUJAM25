@@ -46,10 +46,12 @@ public abstract class NPCBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();  // Animator referansý alýnýyor.
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
     }
+
 
     protected virtual void Update()
     {
@@ -68,7 +70,6 @@ public abstract class NPCBase : MonoBehaviour
                     state = NPCState.Chase;
                     chaseTimer = chaseMemoryTime;
                     chaseDirectionSign = (player.position.x - transform.position.x) >= 0 ? 1 : -1;
-                    
                 }
                 break;
             case NPCState.Chase:
@@ -77,8 +78,16 @@ public abstract class NPCBase : MonoBehaviour
         }
 
         UpdateSpriteFlip();
-    }
 
+        // State'e göre animasyon tetikleme (her frame çaðrýlabilir, trigger'larýn Animator Controller'da uygun þekilde ayarlanmasý gerekir)
+        if (animator != null)
+        {
+            if (state == NPCState.Patrol)
+                animator.SetTrigger("Patrol");
+            else if (state == NPCState.Chase)
+                animator.SetTrigger("Chase");
+        }
+    }
     protected bool IsPlayerDetected()
     {
         Vector2 originUpper = (Vector2)transform.position + Vector2.up * detectionRayOffset;
