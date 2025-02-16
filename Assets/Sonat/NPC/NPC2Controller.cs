@@ -7,9 +7,7 @@ public class NPC2Controller : NPCBase
     public float idleTurnInterval = 2f;
     private float idleTurnTimer = 0f;
     public GameObject projectilePrefab;
-    public Transform SolSpawnPoint; 
-    public Transform SagSpawnPoint;
-    private Transform projectileSpawnPoint;
+    public Transform projectileSpawnPoint;
     public float projectileSpeed = 5f;
     public float meleeAttackRange = 0.5f;
 
@@ -33,14 +31,6 @@ public class NPC2Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if (spriteRenderer.flipX && projectileSpawnPoint != SolSpawnPoint)
-        {
-            projectileSpawnPoint = SolSpawnPoint;
-        }
-        else if(!spriteRenderer.flipX && projectileSpawnPoint != SagSpawnPoint)
-        {
-            projectileSpawnPoint = SagSpawnPoint;
-        }
 
         float deltaX = player.position.x - transform.position.x;
         float absDeltaX = Mathf.Abs(deltaX);

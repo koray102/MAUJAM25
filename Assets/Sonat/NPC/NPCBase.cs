@@ -95,7 +95,14 @@ public abstract class NPCBase : MonoBehaviour
         if (spriteRenderer != null)
         {
             // Eðer NPC'nin bakýþ yönü sola ise flipX true olur.
-            spriteRenderer.flipX = facingDirection.x < 0;
+            if(facingDirection.x < 0)
+            {
+                gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            }else if (facingDirection.x > 0)
+            {
+                gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            }
+
         }
     }
 

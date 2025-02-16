@@ -60,7 +60,7 @@ Material:
     m_Floats:
     - Vector1_d96c407e4d3e4c5599627a739f3a3764: 0.23
     - _Fullscreen_DepthWrite: 0
-    - _MaskAmount: -0.09983524
+    - _MaskAmount: -0.08377913
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

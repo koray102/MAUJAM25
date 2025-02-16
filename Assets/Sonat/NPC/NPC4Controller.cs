@@ -19,10 +19,10 @@ public class NPC4Controller : NPCBase
     protected override void Patrol()
     {
         // Sprite flip durumuna göre kalkanýn sol elde olup olmadýðý ayarlanýyor.
-        if (spriteRenderer.flipX)
-            KalkanSolEldeMi = true;
-        else
+        if (gameObject.transform.localScale.x > 0)
             KalkanSolEldeMi = false;
+        else
+            KalkanSolEldeMi = true;
 
         // Patrol animasyonu tetikleniyor.
         
@@ -46,10 +46,10 @@ public class NPC4Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        if (spriteRenderer.flipX)
-            KalkanSolEldeMi = true;
-        else
+        if (gameObject.transform.localScale.x > 0)
             KalkanSolEldeMi = false;
+        else
+            KalkanSolEldeMi = true;
 
         float deltaX = player.position.x - transform.position.x;
         bool detected = IsPlayerDetected();
@@ -111,15 +111,16 @@ public class NPC4Controller : NPCBase
     public override void GetDamage()
     {
         // Eðer oyuncu, NPC'nin baktýðý yönde deðilse (shield aktif deðilse) ölecek.
-        if (!((!spriteRenderer.flipX && player.position.x > transform.position.x) ||
-              (spriteRenderer.flipX && player.position.x < transform.position.x)))
+        if (!((!KalkanSolEldeMi && player.position.x > transform.position.x) ||
+              (KalkanSolEldeMi && player.position.x < transform.position.x)))
         {
-      
+           
             Destroy(gameObject);
         }
         else
         {
             Instantiate(MetalImpact, CarpismaTransformu.position, Quaternion.identity);
+
         }
     }
 }
