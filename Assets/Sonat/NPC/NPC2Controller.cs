@@ -110,7 +110,7 @@ public class NPC2Controller : NPCBase
 
     public override void GetDamage()
     {
-  
+        gameManagerScript.OlumOldu();
         Destroy(gameObject);
     }
 }

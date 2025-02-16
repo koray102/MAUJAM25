@@ -65,7 +65,7 @@ public class NPC3Controller : NPCBase
 
     public override void GetDamage()
     {
-
+        gameManagerScript.OlumOldu();
         Destroy(gameObject);
     }
 

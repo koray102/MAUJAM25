@@ -46,6 +46,8 @@ public abstract class NPCBase : MonoBehaviour
 
     public Transform attackPoint;
 
+    public GameManagerScript gameManagerScript;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();

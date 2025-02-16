@@ -133,7 +133,7 @@ public class NPC4Controller : NPCBase
         if (!((!KalkanSolEldeMi && player.position.x > transform.position.x) ||
               (KalkanSolEldeMi && player.position.x < transform.position.x)))
         {
-           
+            gameManagerScript.OlumOldu();
             Destroy(gameObject);
         }
         else
