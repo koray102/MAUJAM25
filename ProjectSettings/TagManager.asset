@@ -9,6 +9,7 @@ TagManager:
   - NPC-1
   - NPC-2
   - NPC-4
+  - Lamp
   layers:
   - Default
   - TransparentFX
