@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 0401a5f87435f7242a759919827b454e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7917505517440666262
+    second: ATUTORIAL4_0
+  - first:
+      213: -3788672121905555021
+    second: ATUTORIAL4_1
+  - first:
+      213: -5294200690011041438
+    second: ATUTORIAL4_2
+  - first:
+      213: 5623820598637673270
+    second: ATUTORIAL4_3
+  - first:
+      213: 4010087529514908839
+    second: ATUTORIAL4_4
+  - first:
+      213: -5015470301911721571
+    second: ATUTORIAL4_5
+  - first:
+      213: 7103064763382200782
+    second: ATUTORIAL4_6
+  - first:
+      213: -8864693226328138640
+    second: ATUTORIAL4_7
+  - first:
+      213: -5007340243034608300
+    second: ATUTORIAL4_8
+  - first:
+      213: 6969111283347893836
+    second: ATUTORIAL4_9
+  - first:
+      213: -448705653926312749
+    second: ATUTORIAL4_10
+  - first:
+      213: 3391590349619094632
+    second: ATUTORIAL4_11
+  - first:
+      213: -3610560644130801924
+    second: ATUTORIAL4_12
+  - first:
+      213: -6462591941055134424
+    second: ATUTORIAL4_13
+  - first:
+      213: -1802575442906644957
+    second: ATUTORIAL4_14
+  - first:
+      213: -8598712433782255823
+    second: ATUTORIAL4_15
+  - first:
+      213: 6482975059939988452
+    second: ATUTORIAL4_16
+  - first:
+      213: -7192940054600329015
+    second: ATUTORIAL4_17
+  - first:
+      213: 5092099694198842742
+    second: ATUTORIAL4_18
+  - first:
+      213: 2644080311255895380
+    second: ATUTORIAL4_19
+  - first:
+      213: 4297125103978858368
+    second: ATUTORIAL4_20
+  - first:
+      213: 6503561318997017761
+    second: ATUTORIAL4_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ATUTORIAL4_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 627
+        width: 168
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a65f0cd3eae5f1290800000000000000
+      internalID: -7917505517440666262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_1
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 642
+        width: 148
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9d46347ceeb6bc0800000000000000
+      internalID: -3788672121905555021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 660
+        width: 30
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2619346b5883786b0800000000000000
+      internalID: -5294200690011041438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_3
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 643
+        width: 91
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63bb256c903db0e40800000000000000
+      internalID: 5623820598637673270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_4
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 655
+        width: 68
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7acb5fa9c51b6a730800000000000000
+      internalID: 4010087529514908839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 527
+        width: 95
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99d7016558756ab0800000000000000
+      internalID: -5015470301911721571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_6
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 531
+        width: 83
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec97df5c4c7239260800000000000000
+      internalID: 7103064763382200782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_7
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 535
+        width: 77
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07c56e15a784af480800000000000000
+      internalID: -8864693226328138640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_8
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 596
+        width: 19
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d6768349a528ab0800000000000000
+      internalID: -5007340243034608300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_9
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 564
+        width: 44
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4e2e1cc9c147b060800000000000000
+      internalID: 6969111283347893836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_10
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 559
+        width: 135
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d44309c590e5c9f0800000000000000
+      internalID: -448705653926312749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_11
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 571
+        width: 81
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86460bc1479511f20800000000000000
+      internalID: 3391590349619094632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 296
+        width: 669
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf6f3964936b4edc0800000000000000
+      internalID: -3610560644130801924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_13
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 0
+        width: 335
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8254b11bed24056a0800000000000000
+      internalID: -6462591941055134424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_14
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 220
+        width: 87
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32ef4b46f27fbf6e0800000000000000
+      internalID: -1802575442906644957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_15
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 214
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f8ca2799c3ba880800000000000000
+      internalID: -8598712433782255823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_16
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 217
+        width: 66
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3907ff77728f950800000000000000
+      internalID: 6482975059939988452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_17
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 208
+        width: 72
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c85ed2512b8d2c90800000000000000
+      internalID: -7192940054600329015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_18
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 66
+        width: 147
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675e89951b5caa640800000000000000
+      internalID: 5092099694198842742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_19
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 212
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d030eb809a1b420800000000000000
+      internalID: 2644080311255895380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_20
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 15
+        width: 126
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087c212d38472ab30800000000000000
+      internalID: 4297125103978858368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATUTORIAL4_21
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 0
+        width: 49
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a4c9c1ff8a414a50800000000000000
+      internalID: 6503561318997017761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ATUTORIAL4_0: -7917505517440666262
+      ATUTORIAL4_1: -3788672121905555021
+      ATUTORIAL4_10: -448705653926312749
+      ATUTORIAL4_11: 3391590349619094632
+      ATUTORIAL4_12: -3610560644130801924
+      ATUTORIAL4_13: -6462591941055134424
+      ATUTORIAL4_14: -1802575442906644957
+      ATUTORIAL4_15: -8598712433782255823
+      ATUTORIAL4_16: 6482975059939988452
+      ATUTORIAL4_17: -7192940054600329015
+      ATUTORIAL4_18: 5092099694198842742
+      ATUTORIAL4_19: 2644080311255895380
+      ATUTORIAL4_2: -5294200690011041438
+      ATUTORIAL4_20: 4297125103978858368
+      ATUTORIAL4_21: 6503561318997017761
+      ATUTORIAL4_3: 5623820598637673270
+      ATUTORIAL4_4: 4010087529514908839
+      ATUTORIAL4_5: -5015470301911721571
+      ATUTORIAL4_6: 7103064763382200782
+      ATUTORIAL4_7: -8864693226328138640
+      ATUTORIAL4_8: -5007340243034608300
+      ATUTORIAL4_9: 6969111283347893836
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

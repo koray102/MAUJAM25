@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: cb5e0db555f147146b4921964aaa3ee8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5465351769466310843
+    second: BTUTORIAL1_0
+  - first:
+      213: 3619675909535837631
+    second: BTUTORIAL1_1
+  - first:
+      213: -5200477103862892403
+    second: BTUTORIAL1_2
+  - first:
+      213: -8916802005004947605
+    second: BTUTORIAL1_3
+  - first:
+      213: 2824702518286351217
+    second: BTUTORIAL1_4
+  - first:
+      213: -9139883801706811330
+    second: BTUTORIAL1_5
+  - first:
+      213: 7746961861216692934
+    second: BTUTORIAL1_6
+  - first:
+      213: 8967173631949990324
+    second: BTUTORIAL1_7
+  - first:
+      213: -2270614476290056230
+    second: BTUTORIAL1_8
+  - first:
+      213: 9147078062448791861
+    second: BTUTORIAL1_9
+  - first:
+      213: -7540535347327086252
+    second: BTUTORIAL1_10
+  - first:
+      213: 4629646974804567175
+    second: BTUTORIAL1_11
+  - first:
+      213: -1920581550398756599
+    second: BTUTORIAL1_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BTUTORIAL1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 355
+        width: 301
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb097974a74d8db40800000000000000
+      internalID: 5465351769466310843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_1
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 416
+        width: 81
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbd2ce5df0cab3230800000000000000
+      internalID: 3619675909535837631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_2
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 423
+        width: 104
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8833b990a134d7b0800000000000000
+      internalID: -5200477103862892403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_3
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 428
+        width: 204
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6f6037d1d7214480800000000000000
+      internalID: -8916802005004947605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_4
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 212
+        width: 97
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17bfb9679fb533720800000000000000
+      internalID: 2824702518286351217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_5
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 239
+        width: 40
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e303be68b1c982180800000000000000
+      internalID: -9139883801706811330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_6
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 250
+        width: 173
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cae15284ccb28b60800000000000000
+      internalID: 7746961861216692934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_7
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 305
+        width: 26
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b9e0ab78ecc17c70800000000000000
+      internalID: 8967173631949990324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_8
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 305
+        width: 101
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf1fdef9282d70e0800000000000000
+      internalID: -2270614476290056230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_9
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 111
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5315705d803f0fe70800000000000000
+      internalID: 9147078062448791861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451da469d03aa5790800000000000000
+      internalID: -7540535347327086252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_11
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 14
+        width: 352
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78420b8056fcf3040800000000000000
+      internalID: 4629646974804567175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTUTORIAL1_12
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 77
+        width: 76
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909205e6149b855e0800000000000000
+      internalID: -1920581550398756599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BTUTORIAL1_0: 5465351769466310843
+      BTUTORIAL1_1: 3619675909535837631
+      BTUTORIAL1_10: -7540535347327086252
+      BTUTORIAL1_11: 4629646974804567175
+      BTUTORIAL1_12: -1920581550398756599
+      BTUTORIAL1_2: -5200477103862892403
+      BTUTORIAL1_3: -8916802005004947605
+      BTUTORIAL1_4: 2824702518286351217
+      BTUTORIAL1_5: -9139883801706811330
+      BTUTORIAL1_6: 7746961861216692934
+      BTUTORIAL1_7: 8967173631949990324
+      BTUTORIAL1_8: -2270614476290056230
+      BTUTORIAL1_9: 9147078062448791861
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
