@@ -12,6 +12,22 @@ public class NPC2Controller : NPCBase
     public float meleeAttackRange = 0.5f;
 
 
+    private void Start()
+    {
+        TriggerAttackAnimation();
+        if (projectilePrefab != null && projectileSpawnPoint != null)
+        {
+
+            GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+            if (projRb != null)
+            {
+                // İniş hızı veriliyor (velocity kullanıyoruz)
+                projRb.linearVelocity = facingDirection * projectileSpeed;
+            }
+            Debug.Log("NPC2: Projectile fırlatıldı.");
+        }
+    }
     protected override void Patrol()
     {
         // NPC2 devriye modunda hareket etmez, sabit durur.

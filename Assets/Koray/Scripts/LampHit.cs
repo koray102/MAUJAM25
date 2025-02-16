@@ -16,7 +16,6 @@ public class LampHit : MonoBehaviour
     void Start()
     {
         BlackBg.SetActive(false);
-        WhiteBg.SetActive(true);
     }
 
 
