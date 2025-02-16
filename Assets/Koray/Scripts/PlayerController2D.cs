@@ -540,8 +540,9 @@ public class PlayerController2D : MonoBehaviour
     {
         if(deathSound != null && deathSoundClip != null)
         deathSound.PlayOneShot(deathSoundClip);
-
+        
         _anim.SetTrigger("Die");
+        gameManager.SeviyeTekrari();
     }
 
     // =====================================================
@@ -571,11 +572,5 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    public void GetHit()
-    {
-        //ölme ile ilgili animasyonlar
-
-        gameManager.SeviyeTekrari();
-    }
 
 }

@@ -36,7 +36,7 @@ public class ProjectileController : MonoBehaviour
         if (collision.transform.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            player.GetHit();
+            player.Die();
         }
         if (!hasImpacted)
         {
