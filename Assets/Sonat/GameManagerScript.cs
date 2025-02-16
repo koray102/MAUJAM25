@@ -51,24 +51,24 @@ public class GameManagerScript : MonoBehaviour
     IEnumerator SmoothLerp(float targetValue, float speed)
     {
         float startValue = maskAmount;
-        // Toplam geçiþ süresi = |target - start| / speed
+        // Toplam geï¿½iï¿½ sï¿½resi = |target - start| / speed
         float duration = Mathf.Abs(targetValue - startValue) / speed;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            // elapsed/duration, 0 ile 1 arasýnda gidip geçiþ oranýný belirler.
+            // elapsed/duration, 0 ile 1 arasï¿½nda gidip geï¿½iï¿½ oranï¿½nï¿½ belirler.
             maskAmount = Mathf.Lerp(startValue, targetValue, elapsed / duration);
-            Debug.Log("Current Value: " + maskAmount);
+            //Debug.Log("Current Value: " + maskAmount);
             elapsed += Time.deltaTime;
 
             TransitionMat.SetFloat("_MaskAmount", maskAmount);
 
-            yield return null; // Bir sonraki frame'e geç
+            yield return null; // Bir sonraki frame'e geï¿½
         }
 
-        // Son adýmda deðeri tam hedefe eþitliyoruz.
+        // Son adï¿½mda deï¿½eri tam hedefe eï¿½itliyoruz.
         maskAmount = targetValue;
-        Debug.Log("Hedefe ulaþýldý!");
+        Debug.Log("Hedefe ulaï¿½ï¿½ldï¿½!");
     }
 }

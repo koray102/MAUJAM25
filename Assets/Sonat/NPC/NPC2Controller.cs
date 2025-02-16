@@ -79,10 +79,12 @@ public class NPC2Controller : NPCBase
     protected override void AttackPlayer()
     {
         // Bu metot varsayılan saldırı için kullanılabilir; NPC2 için ayrı melee veya ranged metotlar kullanıyoruz.
+        TriggerAttackAnimation();
     }
 
     void ShootProjectile()
     {
+        TriggerAttackAnimation();
         if (projectilePrefab != null && projectileSpawnPoint != null)
         {
   

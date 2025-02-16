@@ -7,18 +7,12 @@ public class NPC4Controller : NPCBase
     public Transform CarpismaTransformu;
     public bool KalkanSolEldeMi = false;
 
-    // Animator referansý ekleniyor.
+    // Animator referansï¿½ ekleniyor.
    
-
-    void Start()
-    {
-        base.Start();
-        animator = GetComponent<Animator>();
-    }
 
     protected override void Patrol()
     {
-        // Sprite flip durumuna göre kalkanýn sol elde olup olmadýðý ayarlanýyor.
+        // Sprite flip durumuna gï¿½re kalkanï¿½n sol elde olup olmadï¿½ï¿½ï¿½ ayarlanï¿½yor.
         if (gameObject.transform.localScale.x > 0)
             KalkanSolEldeMi = false;
         else
@@ -104,13 +98,14 @@ public class NPC4Controller : NPCBase
     protected override void AttackPlayer()
     {
         // Attack animasyonu tetikleniyor.
+        TriggerAttackAnimation();
       
-        Debug.Log("NPC1: Player'a saldýrýldý!");
+        Debug.Log("NPC1: Player'a saldï¿½rï¿½ldï¿½!");
     }
 
     public override void GetDamage()
     {
-        // Eðer oyuncu, NPC'nin baktýðý yönde deðilse (shield aktif deðilse) ölecek.
+        // Eï¿½er oyuncu, NPC'nin baktï¿½ï¿½ï¿½ yï¿½nde deï¿½ilse (shield aktif deï¿½ilse) ï¿½lecek.
         if (!((!KalkanSolEldeMi && player.position.x > transform.position.x) ||
               (KalkanSolEldeMi && player.position.x < transform.position.x)))
         {

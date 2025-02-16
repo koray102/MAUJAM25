@@ -95,7 +95,7 @@ public class NPC1Controller : NPCBase
 
     protected override void AttackPlayer()
     {
-
+        TriggerAttackAnimation();
         Debug.Log("NPC1: Player'a sald�r�ld�!");
     }
 
