@@ -12,7 +12,8 @@ public class NPC2Controller : NPCBase
     public float meleeAttackRange = 0.5f;
 
 
-    private void Start()
+
+    protected override void ozelBaslangic()
     {
         TriggerAttackAnimation();
         if (projectilePrefab != null && projectileSpawnPoint != null)

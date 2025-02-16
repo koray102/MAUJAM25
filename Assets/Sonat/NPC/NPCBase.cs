@@ -57,6 +57,8 @@ public abstract class NPCBase : MonoBehaviour
         if (playerObj != null)
             player = playerObj.transform;
         visibleKontrol = player.gameObject.GetComponent<CheckBackground>();
+
+        ozelBaslangic();
     }
 
     protected virtual void Update()
@@ -101,7 +103,7 @@ public abstract class NPCBase : MonoBehaviour
 
         UpdateSpriteFlip();
     }
-
+    
     protected bool IsPlayerDetected()
     {
         Vector2 originUpper = (Vector2)transform.position + Vector2.up * detectionRayOffset;
@@ -160,6 +162,8 @@ public abstract class NPCBase : MonoBehaviour
 
     // Türetilen sınıflarda (ör. NPC1, NPC2) uygulanması gereken metotlar:
     protected abstract void Patrol();
+
+    protected abstract void ozelBaslangic();
     protected abstract void ChaseAndAttack();
     protected abstract void AttackPlayer();
     public abstract void GetDamage();

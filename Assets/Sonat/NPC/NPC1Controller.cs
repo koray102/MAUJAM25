@@ -10,7 +10,7 @@ public class NPC1Controller : NPCBase
             return;
 
         Transform targetPoint = patrolPoints[currentPatrolIndex];
-        if (Vector2.Distance(transform.position, targetPoint.position) > 0.6f)
+        if (Vector2.Distance(transform.position, targetPoint.position) > 2f)
         {
             facingDirection = (targetPoint.position.x - transform.position.x) >= 0 ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
@@ -23,6 +23,9 @@ public class NPC1Controller : NPCBase
         }
     }
 
+    protected override void ozelBaslangic()
+    {
+    }
     protected override void ChaseAndAttack()
     {
 
