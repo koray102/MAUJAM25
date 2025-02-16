@@ -6,6 +6,9 @@ TagManager:
   tags:
   - FxTemporaire
   - NPC-3
+  - NPC-1
+  - NPC-2
+  - NPC-4
   layers:
   - Default
   - TransparentFX

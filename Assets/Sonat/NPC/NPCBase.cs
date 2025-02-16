@@ -118,15 +118,32 @@ public abstract class NPCBase : MonoBehaviour
 
     protected void UpdateSpriteFlip()
     {
+        float kalinlik = 1f;
+
+        if (gameObject.CompareTag("NPC-1"))
+        {
+            kalinlik = 2f;
+        }else if (gameObject.CompareTag("NPC-2"))
+        {
+            kalinlik = 1f;
+        }
+        else if (gameObject.CompareTag("NPC-3"))
+        {
+            kalinlik = 1f;
+        }
+        else if (gameObject.CompareTag("NPC-4"))
+        {
+            kalinlik = 1.5f;
+        }
         if (spriteRenderer != null)
         {
             // E�er NPC'nin bak�� y�n� sola ise flipX true olur.
             if(facingDirection.x < 0)
             {
-                gameObject.transform.localScale = new Vector3(-2, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                gameObject.transform.localScale = new Vector3(-1 * kalinlik, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             }else if (facingDirection.x > 0)
             {
-                gameObject.transform.localScale = new Vector3(2, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                gameObject.transform.localScale = new Vector3(kalinlik, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             }
 
         }
