@@ -160,7 +160,7 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.21115103, y: 0.4261636}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0.82000005, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.69, y: 2.352}
     newSize: {x: 1, y: 1}
@@ -227,7 +227,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 33554496
-  attackPoint: {fileID: 1700636281221557612}
+  attackPoint: {fileID: 0}
   gameManagerScript: {fileID: 0}
   allowIdleTurning: 0
   idleTurnInterval: 2
