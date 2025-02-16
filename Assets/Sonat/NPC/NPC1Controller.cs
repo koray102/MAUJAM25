@@ -4,8 +4,6 @@ public class NPC1Controller : NPCBase
 {
     protected override void Patrol()
     {
-        animator.SetTrigger("Patrol");
-
         if (patrolPoints.Length == 0)
             return;
 
@@ -25,23 +23,22 @@ public class NPC1Controller : NPCBase
 
     protected override void ChaseAndAttack()
     {
-        // NPC ile oyuncu arasýndaki yatay mesafeyi hesapla
+        // NPC ile oyuncu arasï¿½ndaki yatay mesafeyi hesapla
         float deltaX = player.position.x - transform.position.x;
 
-        // Oyuncunun tespit edilip edilmediðini kontrol et
+        // Oyuncunun tespit edilip edilmediï¿½ini kontrol et
         bool detected = IsPlayerDetected();
 
         if (detected)
         {
-            animator.SetTrigger("Chase");
-            // Chase zamanlayýcýsýný sýfýrla
+            // Chase zamanlayï¿½cï¿½sï¿½nï¿½ sï¿½fï¿½rla
             chaseTimer = chaseMemoryTime;
 
-            // NPC'nin bakýþ yönünü belirle
+            // NPC'nin bakï¿½ï¿½ yï¿½nï¿½nï¿½ belirle
             facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
 
-            // Eðer oyuncu saldýrý menzilinin dýþýndaysa, ancak menzile yakýnsa, NPC'yi oyuncunun x pozisyonuna doðru hareket ettir
+            // Eï¿½er oyuncu saldï¿½rï¿½ menzilinin dï¿½ï¿½ï¿½ndaysa, ancak menzile yakï¿½nsa, NPC'yi oyuncunun x pozisyonuna doï¿½ru hareket ettir
             if (Mathf.Abs(deltaX) > attackRange)
             {
                 Vector2 newPos = transform.position;
@@ -50,31 +47,31 @@ public class NPC1Controller : NPCBase
             }
             else
             {
-                // Saldýrý menzilindeyse, saldýrý zamanlayýcýsýný kontrol et
+                // Saldï¿½rï¿½ menzilindeyse, saldï¿½rï¿½ zamanlayï¿½cï¿½sï¿½nï¿½ kontrol et
                 if (attackTimer <= 0f)
                 {
-                    // Saldýrýyý gerçekleþtir
+                    // Saldï¿½rï¿½yï¿½ gerï¿½ekleï¿½tir
                     AttackPlayer();
-                    // Saldýrý sonrasý bekleme süresini ayarla
+                    // Saldï¿½rï¿½ sonrasï¿½ bekleme sï¿½resini ayarla
                     attackTimer = attackCooldown;
                 }
                 else
                 {
-                    // Saldýrý zamanlayýcýsýný azalt
+                    // Saldï¿½rï¿½ zamanlayï¿½cï¿½sï¿½nï¿½ azalt
                     attackTimer -= Time.deltaTime;
                 }
             }
         }
         else
         {
-            // Chase zamanlayýcýsýný azalt
+            // Chase zamanlayï¿½cï¿½sï¿½nï¿½ azalt
             chaseTimer -= Time.deltaTime;
 
-            // NPC'nin bakýþ yönünü belirle
+            // NPC'nin bakï¿½ï¿½ yï¿½nï¿½nï¿½ belirle
             facingDirection = (deltaX >= 0) ? Vector2.right : Vector2.left;
             lastFacingDirection = facingDirection;
 
-            // Chase zamanlayýcýsý sýfýrdan büyükse, NPC'yi oyuncunun son bilinen x pozisyonuna doðru hareket ettir
+            // Chase zamanlayï¿½cï¿½sï¿½ sï¿½fï¿½rdan bï¿½yï¿½kse, NPC'yi oyuncunun son bilinen x pozisyonuna doï¿½ru hareket ettir
             if (chaseTimer > 0f && Mathf.Abs(deltaX) > attackRange)
             {
                 Vector2 newPos = transform.position;
@@ -87,7 +84,7 @@ public class NPC1Controller : NPCBase
             }
             else
             {
-                // Chase zamanlayýcýsý sýfýra ulaþtýysa, devriye moduna geri dön
+                // Chase zamanlayï¿½cï¿½sï¿½ sï¿½fï¿½ra ulaï¿½tï¿½ysa, devriye moduna geri dï¿½n
                 state = NPCState.Patrol;
             }
         }
@@ -95,13 +92,12 @@ public class NPC1Controller : NPCBase
 
     protected override void AttackPlayer()
     {
-        animator.SetTrigger("Attack");
-        Debug.Log("NPC1: Player'a saldýrýldý!");
+        TriggerAttackAnimation();
+        Debug.Log("NPC1: Player'a saldï¿½rï¿½ldï¿½!");
     }
 
     public override void GetDamage()
     {
-        animator.SetTrigger("Die");
         Destroy(gameObject);
     }
 }
