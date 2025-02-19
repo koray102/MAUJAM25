@@ -5,15 +5,18 @@ public class PlayerController2D : MonoBehaviour
 {
     private bool didDie = false;
 
+
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
     public float jumpForce = 5f;
 
+
     [Header("Ground Check")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
+
 
     [Header("Attack Settings")]
     public float attackCooldown = 0.5f;   // Saldırı tekrarına izin veren süre
@@ -23,26 +26,25 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask enemyLayer;
     public int attackDamage = 10;
 
+
     [Header("Wall Climb Settings")]
     public Transform wallCheck;
     public float wallCheckDistance = 0.5f;
     public float wallSlideSpeed = 2f;
     public float wallClimbSpeed = 3f;
-    public float wallJumpForce = 7f;
     public LayerMask wallLayer;
+
 
     [Header("Dash Settings")]
     [Tooltip("Dash hızı (x ekseninde). Karakter ne kadar güçlü atılsın?")]
     public float dashSpeed = 10f;
-
     [Tooltip("Dash süresi. (Karakterin hızlı şekilde ilerleyeceği zaman aralığı)")]
     public float dashDuration = 0.2f;
-
     [Tooltip("Dash tekrar kullanılmadan önce beklenmesi gereken süre.")]
     public float dashCooldown = 1f;
-
     [Tooltip("Dash için kullanılacak tuş. Örn: E.")]
     public KeyCode dashKey = KeyCode.E;
+
 
     // Duvardan geri sekme (Wall Bounce) ayarları
     [Header("Wall Bounce Settings")]
@@ -57,31 +59,24 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Wall Bounce yapabilmek için bekleme süresi.")]
     public float wallBounceCooldown = 1f;
 
+
     [Header("Wall Bounce Facing Cooldown")]
     public float wallBounceFacingCooldown = 0.5f;
     private float wallBounceFacingTimer = 0f;
     
+
     [Header("Bullet Throw Settings")]
     public float bulletThrowForce = 10f;
+
 
     [Header("Combo Settings")]
     public float comboTimeout = 1f; // Komboyu devam ettirmek için max bekleme süresi
 
+
     [Header("Audio Settings")]
     public AudioSource walkSound;
     public AudioClip walkSoundClip;
-    public AudioSource dashSound;
-    public AudioClip dashSoundClip;
-    public AudioSource attackSound1;
-    public AudioClip attackSoundClip1;
-    public AudioSource attackSound2;
-    public AudioClip attackSoundClip2;
-    public AudioSource attackSound3;
-    public AudioClip attackSoundClip3;
-    public AudioSource enemyHitSound;
-    public AudioClip enemyHitSoundClip;
-    public AudioSource deathSound;
-    public AudioClip deathSoundClip;
+
 
     [Header("Camera Shake")]
     public CameraShake camShakeSc;
@@ -132,6 +127,7 @@ public class PlayerController2D : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
+    
 
     void Update()
     {
@@ -146,11 +142,7 @@ public class PlayerController2D : MonoBehaviour
         // Zıplama
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (_isWallSliding && !_isGrounded)
-            {
-                //WallJump();
-            }
-            else if (_isGrounded && !_isAttacking)
+            if (_isGrounded)
             {
                 Jump();
             }
@@ -179,7 +171,6 @@ public class PlayerController2D : MonoBehaviour
                 lastAttackType = 0;
             }
         }
-
 
         // Attack cooldown’u zamanla azalt
         if (_attackTimer > 0f)
@@ -236,6 +227,7 @@ public class PlayerController2D : MonoBehaviour
         UpdateAnimator();
     }
 
+
     void FixedUpdate()
     {
         if(didDie)
@@ -251,16 +243,16 @@ public class PlayerController2D : MonoBehaviour
         if (_isDashing || _isWallBouncing || _isAttacking)
             return;
 
-        // Duvardaysak duvar tırmanma/slide hareketi
+        // Duvardaysak duvar slide hareketi
         if (_isWallSliding && !_isGrounded)
         {
             WallSlideMovement();
-        }
-        else
+        }else
         {
             // Normal yatay hareket
             float currentSpeed = _isRunning ? runSpeed : walkSpeed;
             Vector2 velocity = _rb.linearVelocity;
+            
             velocity.x = _horizontalInput * currentSpeed;
             _rb.linearVelocity = velocity;
         }
@@ -269,8 +261,7 @@ public class PlayerController2D : MonoBehaviour
         if (_horizontalInput > 0 && transform.localScale.x < 0)
         {
             Flip();
-        }
-        else if (_horizontalInput < 0 && transform.localScale.x > 0)
+        }else if (_horizontalInput < 0 && transform.localScale.x > 0)
         {
             Flip();
         }
@@ -284,8 +275,7 @@ public class PlayerController2D : MonoBehaviour
                 walkSound.clip = walkSoundClip;
                 walkSound.Play();
             }
-        }
-        else
+        }else
         {
             if (walkSound.isPlaying && walkSound.clip == walkSoundClip)
             {
@@ -295,9 +285,8 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    // =====================================================
-    // =============== Duvar Tırmanma Fonksiyonları ========
-    // =====================================================
+    #region Duvar Tırmanma Fonksiyonları
+
     private void CheckWall()
     {
         float direction = transform.localScale.x;
@@ -308,20 +297,23 @@ public class PlayerController2D : MonoBehaviour
         _isWallSliding = _isTouchingWall;
     }
 
+
     private void WallSlideMovement()
     {
         Vector2 velocity = _rb.linearVelocity;
 
-        if(_horizontalInput == 0)
+        if (velocity.y < -wallSlideSpeed)
         {
-            if (velocity.y < -wallSlideSpeed)
-            {
-                velocity.y = -wallSlideSpeed;
-            }
+            velocity.y = -wallSlideSpeed;
         }
+        
         _rb.linearVelocity = velocity;
     }
-    // --------------------- Wall Bounce Fonksiyonları ---------------------
+
+    #endregion
+
+
+    #region Wall Bounce Fonksiyonları
 
     private void StartWallBounce(int direction = 1)
     {
@@ -335,6 +327,7 @@ public class PlayerController2D : MonoBehaviour
         if (_anim) _anim.SetTrigger("WallBounce");
     }
 
+
     private void StopWallBounce()
     {
         _isWallBouncing = false;
@@ -343,11 +336,11 @@ public class PlayerController2D : MonoBehaviour
         _rb.linearVelocity = currentVel;
     }
 
-    // ---------------------------------------------------------------------
+    #endregion
 
-    // =====================================================
-    // =============== Dash Fonksiyonları ==================
-    // =====================================================
+
+    #region  Dash Fonksiyonları
+
     private void StartDash()
     {
         _isDashing = true;
@@ -366,11 +359,11 @@ public class PlayerController2D : MonoBehaviour
             _anim.SetTrigger("Dash");
         }
 
-        if(dashSoundClip != null && dashSoundClip != null)
-        dashSound.PlayOneShot(dashSoundClip);
+        SoundManager.PlaySound(SoundManager.soundType.Dash);
 
         StartCoroutine(camShakeSc.Shake(dashCamShakeDuration, dashCamShake));
     }
+
 
     private void StopDash()
     {
@@ -382,9 +375,10 @@ public class PlayerController2D : MonoBehaviour
         _rb.linearVelocity = currentVel;
     }
 
-    // =====================================================
-    // =============== Normal Zıplama & Zemin ==============
-    // =====================================================
+    #endregion
+
+
+    #region  Normal Zıplama & Zemin
 
     private void Jump()
     {
@@ -395,8 +389,8 @@ public class PlayerController2D : MonoBehaviour
 
         if (_anim)
             _anim.SetTrigger("JumpUp"); // Yukarı zıplama animasyonu
-
     }
+
 
     private void CheckGround(bool eskiisGrounded)
     {
@@ -410,6 +404,7 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+
     private void Flip()
     {
         if (_isTouchingWall)
@@ -421,9 +416,10 @@ public class PlayerController2D : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // =====================================================
-    // ==================== Saldırı ========================
-    // =====================================================
+    #endregion
+
+
+    #region  Saldırı
 
     private void AttemptComboAttack()
     {
@@ -450,6 +446,7 @@ public class PlayerController2D : MonoBehaviour
         comboTimer = comboTimeout;
     }
 
+
     private void StartAttack(int attackType)
     {
         _isAttacking = true;
@@ -466,20 +463,20 @@ public class PlayerController2D : MonoBehaviour
             if (attackType == 1)
             {
                 _anim.SetTrigger("Attack1");
-                if(attackSound1 != null && attackSoundClip1 != null)
-                attackSound1.PlayOneShot(attackSoundClip1);
+
+                SoundManager.PlaySound(SoundManager.soundType.Attack1, 0.15f);
 
             }else if (attackType == 2)
             {
                 _anim.SetTrigger("Attack2");
-                if(attackSound2 != null && attackSoundClip2 != null)
-                attackSound2.PlayOneShot(attackSoundClip2);
+
+                SoundManager.PlaySound(SoundManager.soundType.Attack2, 0.15f);
             }
             else if (attackType == 3)
             {
                 _anim.SetTrigger("Attack3");
-                if(attackSound3 != null && attackSoundClip3 != null)
-                attackSound3.PlayOneShot(attackSoundClip3);
+
+                SoundManager.PlaySound(SoundManager.soundType.Attack3, 0.15f);
             }
         }
         
@@ -524,8 +521,7 @@ public class PlayerController2D : MonoBehaviour
                 {
                     enemyScript.GetDamage();
 
-                    if(enemyHitSound != null && enemyHitSoundClip != null)
-                    enemyHitSound.PlayOneShot(enemyHitSoundClip);
+                    SoundManager.PlaySound(SoundManager.soundType.HitEnemy);
 
                     StartCoroutine(camShakeSc.Shake(hitCamShakeDuration, hitCamShake));
                 }
@@ -539,9 +535,11 @@ public class PlayerController2D : MonoBehaviour
         _isAttacking = false;
     }
 
-    // =====================================================
-    // =================== Animasyon =======================
-    // =====================================================
+    #endregion
+
+
+    #region  Animasyon
+
     private void UpdateAnimator()
     {
         if (_anim == null)
@@ -549,16 +547,15 @@ public class PlayerController2D : MonoBehaviour
 
         _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
         _anim.SetFloat("YAxisSpeed", Mathf.Abs(_rb.linearVelocity.y));
-        _anim.SetBool("IsGrounded", _isGrounded);
-        _anim.SetBool("IsRunning", _isRunning);
         _anim.SetBool("IsWallSlidingDown", _isWallSliding);
         _anim.SetBool("IsDashing", _isDashing);
         _anim.SetBool("IsFalling", !_isGrounded && _rb.linearVelocity.y < 0);
     }
 
-    // =====================================================
-    // =================== Animasyon =======================
-    // =====================================================
+    #endregion
+
+
+    #region  Ölüm
 
     public void Die()
     {
@@ -566,16 +563,17 @@ public class PlayerController2D : MonoBehaviour
             return;
 
         didDie = true;
-        if(deathSound != null && deathSoundClip != null)
-        deathSound.PlayOneShot(deathSoundClip);
+
+        SoundManager.PlaySound(SoundManager.soundType.Death, 0.8f);
         
         _anim.SetTrigger("Die");
         gameManager.SeviyeTekrari();
     }
 
-    // =====================================================
-    // =================== Gizmos Debug ====================
-    // =====================================================
+    #endregion
+
+
+    #region  Gizmos Debug
     private void OnDrawGizmosSelected()
     {
         if (attackPoint != null)
@@ -592,13 +590,13 @@ public class PlayerController2D : MonoBehaviour
 
         if (wallCheck != null)
         {
-            Gizmos.color = Color.blue;
+            Gizmos.color = Color.grey;
             float direction = (transform != null) ? transform.localScale.x : 1f;
             Vector2 startPos = wallCheck.position;
-            Vector2 endPos = startPos + Vector2.right * direction * wallCheckDistance;
+            Vector2 endPos = startPos + direction * wallCheckDistance * Vector2.right;
             Gizmos.DrawLine(startPos, endPos);
         }
     }
 
-
+    #endregion
 }
